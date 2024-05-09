@@ -1,4 +1,8 @@
-export const codeStatus = (status:number):string =>{
+/**
+  * 状态码类型转换为中文输出
+  * @param status  状态码
+ */
+ export const  codeStatus = (status:number):string => {
     let message: string = '请求成功';
     switch (status) {
         case 400:
@@ -42,3 +46,5 @@ export const codeStatus = (status:number):string =>{
       }
     return  message;
 }
+
+

@@ -9,7 +9,7 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 // import { Logger } from '../utils/log4js';
-import {  codeStatus} from "./statusCode";
+import * as utils from './index';
 import { map, Observable } from 'rxjs';
 
  interface InterfaceTypes {
@@ -69,8 +69,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
       interfaceData.code  = -1;
       interfaceData.time  = new Date().getTime();
       interfaceData.status  = status;
-      interfaceData.message  = codeStatus(status);
- 
+      interfaceData.message  = utils.codeStatus(status);
+    console.log(utils);
+    
     // const errorLogger = {
     //   originalUrl: request.originalUrl,
     //   method: request.originalUrl,
