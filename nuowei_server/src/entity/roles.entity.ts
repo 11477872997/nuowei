@@ -16,12 +16,11 @@ export class Roles extends BaseEntity {
   @PrimaryGeneratedColumn('uuid') // 主键
   id: string;
   // 名称
-  @Column({ type: 'varchar', nullable: false, length: 255, comment: '名称' })
+  @Column({ type: 'varchar', length: 255, comment: '名称' })
   name: string;
   // 权限标识
   @Column({
     type: 'varchar',
-    nullable: false,
     length: 10000,
     comment: '权限标识',
   })
@@ -29,7 +28,6 @@ export class Roles extends BaseEntity {
   // 权限默认选中标识
   @Column({
     type: 'varchar',
-    nullable: false,
     length: 255,
     comment: '权限默认选中标识',
   })
@@ -37,15 +35,14 @@ export class Roles extends BaseEntity {
   // 权限字符
   @Column({
     type: 'varchar',
-    nullable: false,
     length: 10000,
     comment: '权限字符',
   })
   role_key: string;
   // 更新时间
-  @UpdateDateColumn({ type: 'timestamp', nullable: false, comment: '更新时间' })
+  @UpdateDateColumn({ type: 'timestamp', comment: '更新时间' })
   update_time: Date;
   // 创建时间
-  @CreateDateColumn({ type: 'timestamp', nullable: false, comment: '创建时间' })
+  @CreateDateColumn({ type: 'timestamp', comment: '创建时间' })
   create_time: Date;
 }

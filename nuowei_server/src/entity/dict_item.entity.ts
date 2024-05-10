@@ -21,40 +21,39 @@ export class DictItem extends BaseEntity {
   @Generated('uuid')
   @Column({
     type: 'varchar',
-    nullable: false,
     length: 255,
     comment: '字典父级id',
   })
   dict_id: string;
   // 标签
-  @Column({ type: 'varchar', nullable: false, length: 255, comment: '标签' })
+  @Column({ type: 'varchar',  length: 255, comment: '标签' })
   dict_label: string;
   // 值
-  @Column({ type: 'varchar', nullable: false, length: 255, comment: '值' })
+  @Column({ type: 'varchar',  length: 255, comment: '值' })
   dict_value: string;
   // 排序
   @Index()
-  @Column({ type: 'int', default: 0, nullable: false, comment: '排序' })
+  @Column({ type: 'int', default: 0,  comment: '排序' })
   dict_sort: number;
   // 样式
-  @Column({ type: 'varchar', nullable: false, length: 255, comment: '样式' })
+  @Column({ type: 'varchar',  length: 255, comment: '样式' })
   dict_class: string;
   // 状态
   @Index()
   @Column({
     type: 'int',
     default: 1,
-    nullable: false,
+    
     comment: '1:启用,2:禁用',
   })
   status: number;
   // 备注
-  @Column({ type: 'varchar', nullable: false, length: 255, comment: '备注' })
+  @Column({ type: 'varchar',  length: 255, comment: '备注' })
   remark: string;
   // 更新时间
-  @UpdateDateColumn({ type: 'timestamp', nullable: false, comment: '更新时间' })
+  @UpdateDateColumn({ type: 'timestamp',  comment: '更新时间' })
   update_time: Date;
   // 创建时间
-  @CreateDateColumn({ type: 'timestamp', nullable: false, comment: '创建时间' })
+  @CreateDateColumn({ type: 'timestamp',  comment: '创建时间' })
   create_time: Date;
 }

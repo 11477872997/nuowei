@@ -17,23 +17,22 @@ export class Dict extends BaseEntity {
   id: string;
   // 名称
   @Index()
-  @Column({ type: 'varchar', nullable: false, length: 255, comment: '名称' })
+  @Column({ type: 'varchar',  length: 255, comment: '名称' })
   name: string;
   // 类型字符
   @Column({
     type: 'varchar',
-    nullable: false,
     length: 255,
     comment: '类型字符',
   })
   type: string;
   // 备注
-  @Column({ type: 'varchar', nullable: false, length: 255, comment: '备注' })
+  @Column({ type: 'varchar', length: 255, comment: '备注' })
   remark: string;
   // 更新时间
-  @UpdateDateColumn({ type: 'timestamp', nullable: false, comment: '更新时间' })
+  @UpdateDateColumn({ type: 'timestamp',  comment: '更新时间' })
   update_time: Date;
   // 创建时间
-  @CreateDateColumn({ type: 'timestamp', nullable: false, comment: '创建时间' })
+  @CreateDateColumn({ type: 'timestamp', comment: '创建时间' })
   create_time: Date;
 }
