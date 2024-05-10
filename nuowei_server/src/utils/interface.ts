@@ -70,8 +70,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
       interfaceData.time  = new Date().getTime();
       interfaceData.status  = status;
       interfaceData.message  = utils.codeStatus(status);
-    console.log(utils);
-    
     // const errorLogger = {
     //   originalUrl: request.originalUrl,
     //   method: request.originalUrl,
