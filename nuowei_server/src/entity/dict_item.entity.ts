@@ -7,7 +7,6 @@ import {
   UpdateDateColumn,
   Index,
   BaseEntity,
-  Generated,
 } from 'typeorm';
 @Entity({ name: 'dict_item' })
 export class DictItem extends BaseEntity {
@@ -18,7 +17,6 @@ export class DictItem extends BaseEntity {
   id: string;
   // 字典父级id
   @Index()
-  @Generated('uuid')
   @Column({
     type: 'varchar',
     length: 255,
@@ -39,11 +37,9 @@ export class DictItem extends BaseEntity {
   @Column({ type: 'varchar',  length: 255, comment: '样式' })
   dict_class: string;
   // 状态
-  @Index()
   @Column({
     type: 'int',
     default: 1,
-    
     comment: '1:启用,2:禁用',
   })
   status: number;

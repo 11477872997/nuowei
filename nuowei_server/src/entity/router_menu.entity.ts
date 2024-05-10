@@ -2,7 +2,6 @@
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Generated,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -18,8 +17,7 @@ export class RouterMenu extends BaseEntity {
   id: string;
   // 父级id
   @Index()
-  @Generated('uuid')
-  @Column({ type: 'varchar', nullable: true, length: 255, comment: '父级id' })
+  @Column({ type: 'varchar', length: 255, comment: '父级id' })
   parent_id: string;
   // 标题
   @Column({ type: 'varchar', length: 255, comment: '标题' })
