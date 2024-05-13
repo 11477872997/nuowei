@@ -30,10 +30,10 @@ let interfaceData:InterfaceTypes = {
     status: 200,
 }
 
-//   正常接口封装
 @Injectable()
 export class TransformInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+  console.log(' ', 123)
     return next.handle().pipe(
       map((data) => {
         let request = context.switchToHttp().getRequest();
@@ -58,10 +58,10 @@ export class TransformInterceptor implements NestInterceptor {
     );
   }
 }
-// 错误接口封装
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
+    console.log(' ', 123333)
     const ctx = host.switchToHttp(); // 获取请求上下文
     const response = ctx.getResponse(); // 获取请求上下文中的 response对象
     const request = ctx.getRequest(); // 在请求上下文中获取 request 对象

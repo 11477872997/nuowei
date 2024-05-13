@@ -8,9 +8,8 @@ import { HttpExceptionFilter,TransformInterceptor } from "@utils/interface";
 // creacAFiletName('registry')
 async function bootstrap() {
   const app = await NestFactory.create(AppModule); 
-  //全局错接口误统一返回
+  // 过滤器
   app.useGlobalFilters(new HttpExceptionFilter());
-  // 全局200 接口统-返回
   app.useGlobalInterceptors(new TransformInterceptor())
   // 设置全局路由前缀
   app.setGlobalPrefix('api');

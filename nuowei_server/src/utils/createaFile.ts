@@ -1,6 +1,6 @@
-const {exec}  = require('node:child_process');
-const path = require('node:path');
 
+import * as path from 'path';
+import * as nodes from 'child_process';
 // 遵循 hy.md 文件配置命令执行
 export async function creacAFiletName(name:string) {
     // 创建模块
@@ -19,7 +19,7 @@ export async function creacAFiletName(name:string) {
 //  会被注册到外层的app.module.ts
 
 const execfun = ((cmd:string)=>{
-    exec(cmd, { cwd: path.join(process.cwd()) }, (err, stdout, stderr) => {
+    nodes.exec(cmd, { cwd: path.join(process.cwd()) }, (err, stdout, stderr) => {
         if(err) {
             console.log(err)
             return;

@@ -1,11 +1,11 @@
-import { Controller,Post,Body} from '@nestjs/common';
+import { Controller,Get,UseFilters} from '@nestjs/common';
 import { RegistryService } from './registry.service';
 @Controller('registry')
 export class RegistryController {
     constructor(private readonly registryService: RegistryService) {}
 
-    @Post()
-    async setAuth(@Body() body){
-        return this.registryService.setAuth(body);
+    @Get()
+    async setAuth(){
+        return this.registryService.setAuth();
     }
 }
