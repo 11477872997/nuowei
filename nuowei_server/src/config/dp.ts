@@ -16,10 +16,11 @@ export const AppDataSource = new DataSource({
     subscribers: [],
 });
 
+
 AppDataSource.initialize()
 .then(() => {
     console.log('连接数据库成功!');
-    })
-    .catch((err) => {
-      console.error('连接数据库失败', err);
-    });
+})
+.catch((err) => {
+    console.error('连接数据库失败', err);
+});

@@ -29,11 +29,12 @@ export class Tests extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 255,
+    default: '',
     comment: '类型字符',
   })
   type: string;
   // 备注
-  @Column({ type: 'varchar', length: 255, comment: '备注' })
+  @Column({ type: 'varchar', length: 255, default: '', comment: '备注' })
   remark: string;
   // 更新时间
   @UpdateDateColumn({ type: 'timestamp',  comment: '更新时间' })
