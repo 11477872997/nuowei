@@ -34,7 +34,7 @@ let interfaceData: InterfaceTypes = {
 export class TransformInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
-      map((data) => {
+      map((res) => {
         let request = context.switchToHttp().getRequest();
         let LoggerData = {
           originalUrl: request.originalUrl,
@@ -43,15 +43,16 @@ export class TransformInterceptor implements NestInterceptor {
           params: request.params,
           query: request.query,
           body: request.body,
-          data,
+          data:res.data,
           code: 0,
-          message: '请求成功',
+          message: res.message?res.message:'请求成功',
           status: 200,
           time: new Date().getTime(),
           success: true,
         };
         Logger.access(LoggerData);
-        interfaceData.data = data;
+        interfaceData.data = res.data;
+        interfaceData.message = res.message?res.message:'请求成功';
         return interfaceData;
       }),
     );
