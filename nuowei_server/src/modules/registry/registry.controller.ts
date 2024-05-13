@@ -1,4 +1,4 @@
-import { Controller,Get,UseFilters} from '@nestjs/common';
+import { Controller,Get} from '@nestjs/common';
 import { RegistryService } from './registry.service';
 @Controller('registry')
 export class RegistryController {

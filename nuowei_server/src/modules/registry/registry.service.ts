@@ -13,7 +13,7 @@ import { AppDataSource } from '@config/dp';
 @Injectable()
 export class RegistryService {
   async setAuth(): Promise<Dict[]> {
-    // try {
+    try {
       const db = AppDataSource.createQueryBuilder()
         .insert()
         .into(Dict)
@@ -36,11 +36,9 @@ export class RegistryService {
           },
         ]);
       const res = await db.execute();
-      
       return [];
-    // } catch (error) {
-    //   console.log('error ', error);
-    
-    // }
+    } catch (error) {
+      return error;
+    }
   }
 }
