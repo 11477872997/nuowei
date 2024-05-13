@@ -1,4 +1,4 @@
-import { Injectable,NotFoundException  } from '@nestjs/common';
+import { Injectable,HttpException,HttpStatus   } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -19,7 +19,7 @@ export class RegistryService {
         .into(Dict)
         .values([
           {
-            id: '1',
+            id: '123123请问123请问1312332342',
             name: '字典1',
             type: 'type1',
             remark: '第一',
@@ -27,7 +27,7 @@ export class RegistryService {
             create_time: '2023-05-25 10:29:01',
           },
           {
-            id: '2',
+            id: '2234211231231其味无穷2334',
             name: '字典2',
             type: 'type2',
             remark: '第二',
@@ -38,6 +38,7 @@ export class RegistryService {
       const res = await db.execute();
       return [];
     } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
       return error;
     }
   }
