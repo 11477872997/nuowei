@@ -8,7 +8,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path'
 //一件生成模块文件夹 在npm run start:dev 环境 不然会多次引入server 文件 ，要手动删除 
 // import { creacAFiletName} from './utils/createAFile'
-// creacAFiletName('registry')
+// creacAFiletName('admin')
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
    // 全局注册验证

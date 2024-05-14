@@ -51,7 +51,7 @@ export class TransformInterceptor implements NestInterceptor {
           success: true,
         };
         Logger.access(LoggerData);
-        interfaceData.data = res.data;
+        interfaceData.data = res.data?res.data:res;
         interfaceData.message = res.message?res.message:'请求成功';
         return interfaceData;
       }),
@@ -68,6 +68,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     interfaceData.code = -1;
     interfaceData.time = new Date().getTime();
     interfaceData.status = status;
+    interfaceData.data = null;
     interfaceData.message = utils.codeStatus(status);
     const errorLogger = {
       originalUrl: request.originalUrl,
