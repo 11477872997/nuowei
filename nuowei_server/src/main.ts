@@ -4,12 +4,13 @@ import { disposition} from '@config/index';
 const os = require('node:os'); 
 import { HttpExceptionFilter,TransformInterceptor } from "@utils/interface";
 import { ValidationPipe } from '@nestjs/common';
-
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path'
 //一件生成模块文件夹 在npm run start:dev 环境 不然会多次引入server 文件 ，要手动删除 
 // import { creacAFiletName} from './utils/createAFile'
 // creacAFiletName('registry')
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
    // 全局注册验证
    app.useGlobalPipes(new ValidationPipe({
     whitelist:true,
@@ -21,6 +22,10 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor())
   // 设置全局路由前缀
   app.setGlobalPrefix('api');
+  // 配置静态目录
+  app.useStaticAssets(join(__dirname, '../src/', 'public'),{
+    prefix: '/static/', //设置虚拟路径
+  }) // http://localhost:5000/static/xxx.txt
   await app.listen(disposition.host);
   const cars = [
     {
