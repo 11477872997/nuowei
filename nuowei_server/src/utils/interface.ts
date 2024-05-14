@@ -65,11 +65,15 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse(); // 获取请求上下文中的 response对象
     const request = ctx.getRequest(); // 在请求上下文中获取 request 对象
     const status = exception.getStatus(); // 获取异常状态码
+     // 设置错误信息
+     const message = exception['response'].message
+     ? exception['response'].message
+     : `${status >= 500 ? utils.codeStatus(status) : utils.codeStatus(status)}`;
     interfaceData.code = -1;
     interfaceData.time = new Date().getTime();
     interfaceData.status = status;
     interfaceData.data = null;
-    interfaceData.message = utils.codeStatus(status);
+    interfaceData.message = message
     const errorLogger = {
       originalUrl: request.originalUrl,
       method: request.originalUrl,

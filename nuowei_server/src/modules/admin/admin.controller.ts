@@ -1,11 +1,12 @@
-import { Controller,Get } from '@nestjs/common';
+import { Controller,Post,Body } from '@nestjs/common';
 import { AdminService } from './admin.service';
+import { CreatePostDto } from "./admin.dot";
 @Controller('admin')
 export class AdminController {
     constructor(private readonly adminService: AdminService) {}
 
-    @Get()
-    getHello(): string {
-      return this.adminService.getHello();
+    @Post()
+    setAuth(@Body() body:CreatePostDto) {
+      return this.adminService.setAuth(body);
     }
 }

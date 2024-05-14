@@ -1,8 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { disposition} from '@config/index';
-const os = require('node:os'); 
 import { HttpExceptionFilter,TransformInterceptor } from "@utils/interface";
+import * as os from 'os'
+// swagger 文件插件
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path'
@@ -26,6 +28,17 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '../src/', 'public'),{
     prefix: '/static/', //设置虚拟路径
   }) // http://localhost:5000/static/xxx.txt
+
+  // 设置swagger文档
+  const config = new DocumentBuilder()
+  .setTitle('nuowei开源系统')   
+  .setDescription('nuowei接口文档')
+  .setVersion('1.0')
+  .addBearerAuth()
+  .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('docs', app, document);
+
   await app.listen(disposition.host);
   const cars = [
     {
@@ -39,6 +52,10 @@ async function bootstrap() {
     {
       "参数": 'ip地址',
       "说明": `${os.networkInterfaces().WLAN[1].address}:${disposition.host}`,
+    },
+    {
+      "参数": '接口文档地址',
+      "说明": `localhost:${disposition.host}/docs`,
     }
   ];
   console.table(cars);
