@@ -7,8 +7,7 @@ import { disposition} from '@config/index';
   imports:[JwtModule.register({
     //生成token的key
     secret:disposition.jwtKey,
-    // signOption可以在JwtModule设定
-    // 或是在createToken时候设定
+    // signOption可以在JwtModule设定或是在createToken时候设定
     signOptions: {
       //token的有效时长
         expiresIn: '1h',

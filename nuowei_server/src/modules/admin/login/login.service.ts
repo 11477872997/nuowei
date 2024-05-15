@@ -29,8 +29,6 @@ export class LoginService {
           message: "密码不正确",
         }
       }else{
-        console.log('pwdRes',pwdRes[0]);
-        
         return {
           data: {
             ...pwdRes[0],
@@ -39,11 +37,6 @@ export class LoginService {
           message: "请求成功",
         }
       }
-       console.log('res',pwdRes);  
-
-     
-
-    
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
       return error;
