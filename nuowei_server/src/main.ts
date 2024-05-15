@@ -8,9 +8,6 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path'
-//一件生成模块文件夹 在npm run start:dev 环境 不然会多次引入server 文件 ，要手动删除 
-// import { creacAFiletName} from './utils/createAFile'
-// creacAFiletName('admin')
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
    // 全局注册验证
@@ -23,7 +20,7 @@ async function bootstrap() {
   // 全局注册响应拦截
   app.useGlobalInterceptors(new TransformInterceptor())
   // 设置全局路由前缀
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('nouwei');
   // 配置静态目录
   app.useStaticAssets(join(__dirname, '../src/', 'public'),{
     prefix: '/static/', //设置虚拟路径
@@ -32,7 +29,7 @@ async function bootstrap() {
   // 设置swagger文档
   const config = new DocumentBuilder()
   .setTitle('nuowei开源系统')   
-  .setDescription('nuowei接口文档')
+  .setDescription('nest.js + vue 后台管理系统接口文档')
   .setVersion('1.0')
   .addBearerAuth()
   .build();

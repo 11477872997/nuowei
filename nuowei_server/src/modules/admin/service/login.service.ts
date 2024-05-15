@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class LoginService {
-    getHello(): string {
+  setAuth(body): string {
         return 'login!';
       }
 }
