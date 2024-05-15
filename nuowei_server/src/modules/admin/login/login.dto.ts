@@ -7,6 +7,7 @@ export class CreatePostDto {
   @ApiProperty({ description: '用户名',example: "admin" })
   readonly name: string;
   @IsNotEmpty({ message: '密码必填' })
-  @ApiProperty({ description: '密码',example: "123456" })
+  @ApiProperty({ description: '密码',example: "63f6deb737ab85677d6f11beea14a08b" })
   readonly pwd: string;
+
 }
