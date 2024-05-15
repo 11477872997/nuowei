@@ -53,6 +53,9 @@ export class TransformInterceptor implements NestInterceptor {
         Logger.access(LoggerData);
         interfaceData.data = res.data?res.data:res;
         interfaceData.message = res.message?res.message:'请求成功';
+        interfaceData.status = 200;
+        interfaceData.success = true;
+        interfaceData.code = 0;
         return interfaceData;
       }),
     );
@@ -66,14 +69,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest(); // 在请求上下文中获取 request 对象
     const status = exception.getStatus(); // 获取异常状态码
      // 设置错误信息
-     const message = exception['response'].message
-     ? exception['response'].message
-     : `${status >= 500 ? utils.codeStatus(status) : utils.codeStatus(status)}`;
+    if(typeof exception['response'].message === "string"){
+      interfaceData.message = utils.codeStatus(status);
+    }else{
+      interfaceData.message = exception['response'].message
+    }
     interfaceData.code = -1;
     interfaceData.time = new Date().getTime();
     interfaceData.status = status;
     interfaceData.data = null;
-    interfaceData.message = message
+    interfaceData.success = false;
     const errorLogger = {
       originalUrl: request.originalUrl,
       method: request.originalUrl,

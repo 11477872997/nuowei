@@ -4,6 +4,9 @@ import { ApiProperty} from '@nestjs/swagger';
 // ApiPropertyOptional 不是必填
 export class CreatePostDto {
   @IsNotEmpty({ message: '用户名必填' })
-  @ApiProperty({ description: '用户名' })
+  @ApiProperty({ description: '用户名',example: "makalo" })
   readonly username: string;
+  @IsNotEmpty({ message: '密码必填' })
+  @ApiProperty({ description: '密码',example: "123456" })
+  readonly password: string;
 }

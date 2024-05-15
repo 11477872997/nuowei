@@ -6,7 +6,7 @@
     let message: string = '请求成功';
     switch (status) {
         case 400:
-          message = '错误请求'
+          message = '参数错误'
           break
         case 401:
           message = '未授权，请重新登录'
