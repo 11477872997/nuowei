@@ -1,5 +1,5 @@
 import { ApiPropertyOptional} from '@nestjs/swagger';
-export class ResInfo {
+export class LoginRes {
     @ApiPropertyOptional({ description: '用户名'})
     name: string
     @ApiPropertyOptional({ description: '用户id'})

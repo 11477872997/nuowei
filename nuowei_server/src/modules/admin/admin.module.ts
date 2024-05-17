@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AdminController } from './admin.controller';
-import { LoginService } from './login/login.service';
+import { LoginService } from './server/login.service';
 import {  JwtModule } from '@nestjs/jwt';
 import { disposition} from '@config/index';
 @Module({
