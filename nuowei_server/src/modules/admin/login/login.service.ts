@@ -20,7 +20,7 @@ export class LoginService {
         message: "用户不存在",
       }
      };
-     db.select("user.name,user.pwd,user.id as uid,user.admin");
+     db.select("user.name,user.id as uid,user.admin");
      db.where('user.name = :name', { name} ).andWhere('user.pwd = :pwd', { pwd} );
      const pwdRes = await db.execute();
       if(!pwdRes.length){
