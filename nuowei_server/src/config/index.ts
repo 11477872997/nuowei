@@ -4,6 +4,7 @@ interface arrangementSetting {
 /**
  *  主要配置文件
  */
+
 export const disposition:arrangementSetting = {
     host:9999
 }

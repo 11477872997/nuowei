@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { disposition} from './config';
-import { HttpExceptionFilter,TransformInterceptor } from "./utils/interface";
+import { disposition } from './config';
+import { HttpExceptionFilter, TransformInterceptor } from "./utils/interface";
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule); 
+  const app = await NestFactory.create(AppModule);
   //全局错接口误统一返回
   app.useGlobalFilters(new HttpExceptionFilter());
   // 全局200 接口统-返回
