@@ -4,7 +4,7 @@ import  * as serverMode from './server';
 import {  JwtModule } from '@nestjs/jwt';
 import { disposition} from '@config/index';
 console.log('serverMode',serverMode);
-
+import { JwtStrategy} from '@config/jwt';
 @Module({
   imports:[JwtModule.register({
     //生成token的key
@@ -15,7 +15,7 @@ console.log('serverMode',serverMode);
         expiresIn: '1h',
     },
 }),],
-  providers: [JwtModule,serverMode.LoginService,serverMode.GetUserInfo],
+  providers: [JwtModule,serverMode.LoginService,serverMode.GetUserInfo,JwtStrategy],
   controllers: [AdminController]
 })
 

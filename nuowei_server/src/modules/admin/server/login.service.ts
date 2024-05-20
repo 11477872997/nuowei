@@ -8,7 +8,7 @@ export class LoginService {
     private readonly jwtService: JwtService,
   ){}
 
-  async setAuth(body): Promise<object> {
+  async setlogin(body): Promise<object> {
     try {
     const {name,pwd} =  body;
      let db = await AppDataSource.createQueryBuilder().select("user").from(sqlMoudes.User, "user");
@@ -29,10 +29,11 @@ export class LoginService {
           message: "密码不正确",
         }
       }else{
+        let uid = pwdRes[0].uid;
         return {
           data: {
             ...pwdRes[0],
-            token: this.jwtService.sign({name,pwd})
+            token: this.jwtService.sign({name,pwd,uid})
           },
           message: "请求成功",
         }

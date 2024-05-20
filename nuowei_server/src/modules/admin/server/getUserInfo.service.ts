@@ -1,10 +1,14 @@
 import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import * as sqlMoudes from "@utils/sql";
+import { JwtStrategy} from '@config/jwt';
 @Injectable()
 export class GetUserInfo {
 
-  async setAuth(body): Promise<object> {
+  async getInfo(req): Promise<object> {
     try {
+
+      console.log('JwtStrategy',req.user);
+      
     // const {name,pwd} =  body;
     //  let db = await AppDataSource.createQueryBuilder().select("user").from(sqlMoudes.User, "user");
     //  db.where('user.name = :name', { name});
@@ -33,7 +37,7 @@ export class GetUserInfo {
     //     }
     //   }
          return {
-          data: null,
+          data: req.user,
           message: "密码不正确",
         }
     } catch (error) {
