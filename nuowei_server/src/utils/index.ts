@@ -1,3 +1,6 @@
+
+import * as Path from 'path';
+import * as fs from 'fs';
 /**
   * 状态码类型转换为中文输出
   * @param status  状态码
@@ -46,5 +49,3 @@
       }
     return  message;
 }
-
-

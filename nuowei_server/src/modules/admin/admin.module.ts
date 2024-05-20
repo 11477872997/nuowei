@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AdminController } from './admin.controller';
-import { LoginService } from './server/login.service';
+import  * as serverMode from './server';
 import {  JwtModule } from '@nestjs/jwt';
 import { disposition} from '@config/index';
+console.log('serverMode',serverMode);
+
 @Module({
   imports:[JwtModule.register({
     //生成token的key
@@ -13,7 +15,8 @@ import { disposition} from '@config/index';
         expiresIn: '1h',
     },
 }),],
-  providers: [LoginService,JwtModule],
+  providers: [JwtModule,serverMode.LoginService,serverMode.GetUserInfo],
   controllers: [AdminController]
 })
+
 export class AdminModule {}
