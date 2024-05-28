@@ -13,41 +13,33 @@ export class GetUserInfo {
         db.where('user.id = :uid', { uid});
         const userInfo = await db.execute();
         const {rolesId} = userInfo[0];
+        // 获取角色
         let db2 = await AppDataSource.createQueryBuilder().select("roles").from(sqlMoudes.Roles, "roles");
         db2.select("roles.role_key as roleKey,roles.roles as userRole");
-        db2.where('roles.id = :id', { id:rolesId});
+        db2.where(`FIND_IN_SET(roles.id, :id)`, { id: rolesId })
         const userRoles = await db2.execute();
-     console.log('uidRes',userRoles);
-     
-    //  if(!nameRes.length){
-    //   return {
-    //     data: null,
-    //     message: "用户不存在",
-    //   }
-    //  };
-    //  db.select("user.name,user.id as uid,user.admin");
-    //  db.where('user.name = :name', { name} ).andWhere('user.pwd = :pwd', { pwd} );
-    //  const pwdRes = await db.execute();
-    //   if(!pwdRes.length){
-    //     return {
-    //       data: null,
-    //       message: "密码不正确",
-    //     }
-    //   }else{
-    //     return {
-    //       data: {
-    //         ...pwdRes[0],
-    //         token: this.jwtService.sign({name,pwd})
-    //       },
-    //       message: "请求成功",
-    //     }
-    //   }
+        let arrRoles = {
+          userRole:'',
+          roleKey:[],
+        }
+        userRoles.forEach(element => {
+          arrRoles.userRole += (arrRoles.userRole ? ',' : '') + element.userRole;
+          arrRoles.roleKey.push(element.roleKey);
+        });
+        let roleAdmin = arrRoles.roleKey.some(t=>t==="admin");
+        // 获取主题
+        let db3 = await AppDataSource.createQueryBuilder().select("theme").from(sqlMoudes.Theme, "theme");
+        db3.select("theme.menu_bg as menuBg,theme.menu_sub_bg as menuSubBg,theme.menu_text as menuText,theme.menu_active_text as menuActiveText,theme.menu_sub_active_text as menuSubActiveText,theme.menu_hover_bg as menuHoverBg ");
+        db3.where('theme.user_id = :uid', { uid});
+        const userTheme = await db3.execute();
          return {
           data: {
             user:userInfo,
-            theme:''
+            ...arrRoles,
+            roleAdmin,
+            theme:userTheme
           },
-          message: "密码不正确",
+          message: "获取成功",
         }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
