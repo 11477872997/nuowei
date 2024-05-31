@@ -90,19 +90,24 @@ export const getTheUserRole = async (req: Request): Promise<object> => {
         arrRoles.roleKey.push(element.roleKey);
       });
       let roleAdmin = arrRoles.roleKey.some((t) => t === 'admin');
-      let data = {
-        userInfo,
+      let data:any = {
         ...arrRoles,
         roleAdmin,
       };
-      resolve(data);
+      data.user =  userInfo[0]
+      resolve({
+        roleAdmin,
+        roleKey:arrRoles["roleKey"],
+        userRole:arrRoles["userRole"],
+        user:userInfo[0]
+      });
     } catch (error) {
       reject(error);
     }
   });
 };
 /**
- *
+ *  获取路由数据
  */
 export const getRouter = async (
   req: Request,
@@ -140,7 +145,7 @@ export const getRouter = async (
       db.addOrderBy('router_menu.update_time', 'DESC');
       const menuRes = await db.execute();
       const userRole: any = await getTheUserRole(req);
-      //角色权限
+      // //角色权限
       let roles = userRole.userRole.split(',');
       let routerArr = [];
       let filterAsyncRoutes = (lists, parentId, pathView = '') => {
@@ -175,7 +180,7 @@ export const getRouter = async (
               sidebar && delete obj.children;
             }
             //是否为admin 用户
-            if (userRole.userInfo.admin == 1 || userRole.roleAdmin) {
+            if (userRole.user.admin == 1 || userRole.roleAdmin) {
               resArr.push(obj);
             } else {
               //只拿角色权限通过的
@@ -196,8 +201,6 @@ export const getRouter = async (
       });
       resolve({routerMenu,routerArr});
     } catch (error) {
-      console.log('error',error);
-      
       reject(error);
     }
   });

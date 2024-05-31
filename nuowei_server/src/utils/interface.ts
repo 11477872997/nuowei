@@ -18,13 +18,13 @@ interface InterfaceTypes {
   success: boolean; // true 正常  false 错误
   status: number; //请求状态码
   time: number; // 当前时间戳
-  code: number; // 0 正常 -1 错误
+  code: number; // 1 正常 -1 错误
 }
 // 接口返回格式定义
 let interfaceData: InterfaceTypes = {
   data: null,
   message: '请求成功',
-  code: 0,
+  code: 1,
   time: new Date().getTime(),
   success: true,
   status: 200,
@@ -44,7 +44,7 @@ export class TransformInterceptor implements NestInterceptor {
           query: request.query,
           body: request.body,
           data:res.data,
-          code: 0,
+          code: 1,
           message: res.message?res.message:'请求成功',
           status: 200,
           time: new Date().getTime(),
@@ -55,7 +55,7 @@ export class TransformInterceptor implements NestInterceptor {
         interfaceData.message = res.message?res.message:'请求成功';
         interfaceData.status = 200;
         interfaceData.success = true;
-        interfaceData.code = 0;
+        interfaceData.code = 1;
         return interfaceData;
       }),
     );
