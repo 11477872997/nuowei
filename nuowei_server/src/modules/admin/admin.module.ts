@@ -15,7 +15,11 @@ import { JwtStrategy} from '@config/jwt';
         expiresIn: '1h',
     },
 }),],
-  providers: [JwtModule,serverMode.LoginService,serverMode.GetUserInfo,JwtStrategy],
+  providers: [JwtModule,
+    serverMode.LoginService,
+    serverMode.GetUserInfo,
+    serverMode.GetRouter,
+    JwtStrategy],
   controllers: [AdminController]
 })
 

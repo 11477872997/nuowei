@@ -9,6 +9,7 @@ export class AdminController {
     constructor(
       private readonly loginService: serverMode.LoginService,
       private readonly getUserInfo: serverMode.GetUserInfo,
+      private readonly getRouter: serverMode.GetRouter,
     ){}
 
     @Post('login')
@@ -24,5 +25,12 @@ export class AdminController {
     @ApiResponse({ status: 200, description: '字段描述', type: dto.LoginRes })
     getInfo(@Req() req) {
       return this.getUserInfo.getInfo(req);
+    }
+    @Post('getRouter')
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '获取路由数据',description:"这是一个获取当前token用户路由数据侧边栏"})
+    @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRouterRes })
+    setRouter(@Req() req) {
+      return this.getRouter.setRouter(req);
     }
 }
