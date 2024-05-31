@@ -18,7 +18,7 @@ export class AdminController {
     setlogin(@Body() CreatePostDto:dto.LoginReq) {
       return this.loginService.setlogin(CreatePostDto);
     }
-    @Get('getUserInfo')
+    @Post('getUserInfo')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '用户信息',description:"这是一个获取当前token用户信息接口"})

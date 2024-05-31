@@ -13,6 +13,7 @@ requestAxios.interceptors.request.use(
   // 请求拦截
   (config) => {
     if (getToken()) config.headers.common["token"] = getToken();
+    if (getToken()) config.headers.common["Authorization"] = 'Bearer '+getToken();
     if (sessionStorage.getItem("captcha")) config.headers.common["captcha"] = sessionStorage.getItem("captcha");
     return config;
   },
