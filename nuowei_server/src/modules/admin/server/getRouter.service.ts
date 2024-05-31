@@ -24,7 +24,7 @@ export class GetRouter {
             data: {
                 routerMenu:arr
             },
-            message: "用户不存在",
+            message: "请求成功",
         }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);

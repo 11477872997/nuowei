@@ -11,8 +11,8 @@ export class LoginService {
   async setlogin(body): Promise<object> {
     try {
     const {name,pwd} =  body;
-     let db = await AppDataSource.createQueryBuilder().select("user").from(sqlMoudes.User, "user");
-     db.where('user.name = :name', { name});
+     let db = await AppDataSource.getRepository(sqlMoudes.User).createQueryBuilder();
+     db.where('name = :name', { name});
      const nameRes = await db.execute();
      if(!nameRes.length){
       return {
@@ -20,8 +20,8 @@ export class LoginService {
         message: "用户不存在",
       }
      };
-     db.select("user.name,user.id as uid,user.admin");
-     db.where('user.name = :name', { name} ).andWhere('user.pwd = :pwd', { pwd} );
+     db.select("name,id as uid,admin");
+     db.where('name = :name', { name} ).andWhere('pwd = :pwd', { pwd} );
      const pwdRes = await db.execute();
       if(!pwdRes.length){
         return {

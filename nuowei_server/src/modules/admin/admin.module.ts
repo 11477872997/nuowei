@@ -3,7 +3,6 @@ import { AdminController } from './admin.controller';
 import  * as serverMode from './server';
 import {  JwtModule } from '@nestjs/jwt';
 import { disposition} from '@config/index';
-console.log('serverMode',serverMode);
 import { JwtStrategy} from '@config/jwt';
 @Module({
   imports:[JwtModule.register({
@@ -19,6 +18,7 @@ import { JwtStrategy} from '@config/jwt';
     serverMode.LoginService,
     serverMode.GetUserInfo,
     serverMode.GetRouter,
+    serverMode.UpUserPwdInfo,
     JwtStrategy],
   controllers: [AdminController]
 })

@@ -57,6 +57,7 @@ const axios = function ({ path, method = "POST", data = {},responseType } = {}) 
     if (method === "POST") datas = { ...{ data } };
     requestAxios({
       url:process.env.VUE_APP_BASE_API+path,
+      // url:'http://127.0.0.1:9999/nouwei'+path,
       method,
       ...datas,
         responseType

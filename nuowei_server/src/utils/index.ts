@@ -65,21 +65,17 @@ export const getTheUserRole = async (req: Request): Promise<object> => {
   return new Promise(async (resolve, reject) => {
     try {
       const { name, pwd, uid } = req.user;
-      let db = await AppDataSource.createQueryBuilder()
-        .select('user')
-        .from(sqlMoudes.User, 'user');
+      let db = await AppDataSource.getRepository(sqlMoudes.User).createQueryBuilder()
       db.select(
-        'user.name,user.id,user.admin,user.status,user.url,user.admin,user.roles_id as rolesId',
+        'name,id,admin,status,url,admin,roles_id as rolesId',
       );
-      db.where('user.id = :uid', { uid });
+      db.where('id = :uid', { uid });
       const userInfo = await db.execute();
       const { rolesId } = userInfo[0];
       // 获取角色
-      let db2 = await AppDataSource.createQueryBuilder()
-        .select('roles')
-        .from(sqlMoudes.Roles, 'roles');
-      db2.select('roles.role_key as roleKey,roles.roles as userRole');
-      db2.where(`FIND_IN_SET(roles.id, :id)`, { id: rolesId });
+      let db2 = await AppDataSource.getRepository(sqlMoudes.Roles).createQueryBuilder()
+      db2.select('role_key as roleKey,roles as userRole');
+      db2.where(`FIND_IN_SET(id, :id)`, { id: rolesId });
       const userRoles = await db2.execute();
       let arrRoles = {
         userRole: '',
@@ -116,37 +112,36 @@ export const getRouter = async (
   return new Promise(async (resolve, reject) => {
     try {
       const { name, pwd, uid } = req.user;
-      let db = await AppDataSource.createQueryBuilder()
-        .select('router_menu')
-        .from(sqlMoudes.RouterMenu, 'router_menu');
+      let db = await AppDataSource.getRepository(sqlMoudes.RouterMenu).createQueryBuilder()
       db.select(
-        `router_menu.id,
-          router_menu.parent_id as parentId,
-          router_menu.path,
-          router_menu.hidden,
-          router_menu.redirect,
-          router_menu.always_show as alwaysShow,
-          router_menu.name,
-          router_menu.layout,
-          router_menu.parent_view as parentView,
-          router_menu.meta,
-          router_menu.component,
-          router_menu.sort,
-          router_menu.alone,
-          router_menu.role_key as roleKey,
-          router_menu.menu_type as menuType,
-          router_menu.title,
-          router_menu.icon,
-          router_menu.no_cache as noCache,
-          router_menu.update_time as updateTime,
-          router_menu.create_time as createTime`,
+        `id,
+         parent_id as parentId,
+         path,
+         hidden,
+         redirect,
+         always_show as alwaysShow,
+         name,
+         layout,
+         parent_view as parentView,
+         meta,
+         component,
+         sort,
+         alone,
+         role_key as roleKey,
+         menu_type as menuType,
+         title,
+         icon,
+         no_cache as noCache,
+         update_time as updateTime,
+         create_time as createTime`,
       );
-      db.orderBy('router_menu.sort', 'ASC');
-      db.addOrderBy('router_menu.update_time', 'DESC');
+      db.orderBy('sort', 'ASC');
+      db.addOrderBy('update_time', 'DESC');
       const menuRes = await db.execute();
       const userRole: any = await getTheUserRole(req);
       // //角色权限
       let roles = userRole.userRole.split(',');
+
       let routerArr = [];
       let filterAsyncRoutes = (lists, parentId, pathView = '') => {
         let resArr = [];

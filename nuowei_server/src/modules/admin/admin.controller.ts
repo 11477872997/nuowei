@@ -10,6 +10,7 @@ export class AdminController {
       private readonly loginService: serverMode.LoginService,
       private readonly getUserInfo: serverMode.GetUserInfo,
       private readonly getRouter: serverMode.GetRouter,
+      private readonly upUserPwdInfo: serverMode.UpUserPwdInfo,
     ){}
 
     @Post('login')
@@ -32,5 +33,12 @@ export class AdminController {
     @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRouterRes })
     setRouter(@Req() req) {
       return this.getRouter.setRouter(req);
+    }
+    @Post('upUserPwdInfo')
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '修改密码',description:"修改当前token用户密码"})
+    // @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRouterRes })
+    upInfoPwd(@Req() req,@Body()CreatePostDto:dto.UpUserPwdInfoReq) {
+      return this.upUserPwdInfo.upInfoPwd(req,CreatePostDto);
     }
 }
