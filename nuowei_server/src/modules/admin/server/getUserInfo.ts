@@ -16,8 +16,6 @@ export class GetUserInfo {
             message: "你账号已被禁用，请联系管理员！！",
           }
        }
-       console.log('list',list.user.status);
-       
         // 获取主题
         let db3 = await AppDataSource.getRepository(sqlMoudes.Theme).createQueryBuilder();
         db3.select(`
