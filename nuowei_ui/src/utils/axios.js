@@ -28,11 +28,11 @@ requestAxios.interceptors.response.use(
     // 相应拦截
     let { data } = response;
     if (data.code == -1) {
-      Message.error(data.msg || "请求异常！");
+      Message.error(data.message || "请求异常！");
       return Promise.reject(data);
     }
-    if (data.code == 203) {
-      Message.error(data.msg || "登陆失效！");
+    if (data.code == 404) {
+      Message.error(data.message || "登陆失效！");
       removeToken();
       store.dispatch('user/logout');
       return Promise.reject(data);

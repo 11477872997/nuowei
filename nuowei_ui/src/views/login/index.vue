@@ -71,7 +71,7 @@ export default {
     },
   },
   created() {
-    this.getCaptcha();
+    // this.getCaptcha();
   },
   methods: {
     //点击登陆

@@ -55,7 +55,7 @@ export class TransformInterceptor implements NestInterceptor {
         interfaceData.message = res.message?res.message:'请求成功';
         interfaceData.status = 200;
         interfaceData.success = true;
-        interfaceData.code = 1;
+        interfaceData.code = res.code?res.code:1;
         return interfaceData;
       }),
     );

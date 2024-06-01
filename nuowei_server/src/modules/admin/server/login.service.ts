@@ -18,6 +18,7 @@ export class LoginService {
       return {
         data: null,
         message: "用户不存在",
+        code:-1
       }
      };
      db.select("name,id as uid,admin");
@@ -27,6 +28,7 @@ export class LoginService {
         return {
           data: null,
           message: "密码不正确",
+          code:-1
         }
       }else{
         let uid = pwdRes[0].uid;
