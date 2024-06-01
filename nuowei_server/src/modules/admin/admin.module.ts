@@ -15,10 +15,7 @@ import { JwtStrategy} from '@config/jwt';
     },
 }),],
   providers: [JwtModule,
-    serverMode.LoginService,
-    serverMode.GetUserInfo,
-    serverMode.GetRouter,
-    serverMode.UpUserPwdInfo,
+    ...Object.values(serverMode), 
     JwtStrategy],
   controllers: [AdminController]
 })

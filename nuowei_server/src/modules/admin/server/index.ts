@@ -1,7 +1,7 @@
-import {GetUserInfo } from './getUserInfo.service';
-import {LoginService } from './login.service';
-import {GetRouter } from './getRouter.service';
-import {UpUserPwdInfo } from './upUserPwdInfo.service';
+import {GetUserInfo } from './getUserInfo';
+import {LoginService } from './login';
+import {GetRouter } from './getRouter';
+import {UpUserPwdInfo } from './upUserPwdInfo';
 export {
   GetUserInfo,
   LoginService,

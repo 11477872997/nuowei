@@ -1,4 +1,4 @@
-import { Controller,Post,Get,Body,UseGuards,Req} from '@nestjs/common';
+import { Controller,Post,Get,Body,UseGuards,Req,Module, DynamicModule} from '@nestjs/common';
 import { ApiTags,ApiOperation,ApiResponse,ApiBearerAuth } from '@nestjs/swagger';
 import  * as dto from "./dto";
 import  * as serverMode from './server';
@@ -37,8 +37,7 @@ export class AdminController {
     @Post('upUserPwdInfo')
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '修改密码',description:"修改当前token用户密码"})
-    // @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRouterRes })
-    upInfoPwd(@Req() req,@Body()CreatePostDto:dto.UpUserPwdInfoReq) {
+    upInfoPwd(@Req() req, @Body() CreatePostDto:dto.UpUserPwdInfoReq) {
       return this.upUserPwdInfo.upInfoPwd(req,CreatePostDto);
     }
 }
