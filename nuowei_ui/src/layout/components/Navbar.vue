@@ -33,7 +33,7 @@
               {{ $t('navbar.dashboard') }}
             </el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://gitee.com/MMinter/vue_node">
+          <a target="_blank" href="https://github.com/11477872997/nuowei">
             <el-dropdown-item>
               {{ $t('navbar.github') }}
             </el-dropdown-item>

@@ -12,9 +12,9 @@ requestAxios.defaults.timeout = 5000; // 请求超时时间
 requestAxios.interceptors.request.use(
   // 请求拦截
   (config) => {
-    if (getToken()) config.headers.common["token"] = getToken();
+    // if (getToken()) config.headers.common["token"] = getToken();
     if (getToken()) config.headers.common["Authorization"] = 'Bearer '+getToken();
-    if (sessionStorage.getItem("captcha")) config.headers.common["captcha"] = sessionStorage.getItem("captcha");
+    // if (sessionStorage.getItem("captcha")) config.headers.common["captcha"] = sessionStorage.getItem("captcha");
     return config;
   },
 
@@ -57,7 +57,6 @@ const axios = function ({ path, method = "POST", data = {},responseType } = {}) 
     if (method === "POST") datas = { ...{ data } };
     requestAxios({
       url:process.env.VUE_APP_BASE_API+path,
-      // url:'http://127.0.0.1:9999/nouwei'+path,
       method,
       ...datas,
         responseType
