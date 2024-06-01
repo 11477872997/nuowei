@@ -8,7 +8,16 @@ export class GetUserInfo {
   async getInfo(req): Promise<object> {
     try {
        const {name,pwd,uid} = req.user;
-       const list = await utils.getTheUserRole(req);
+       const list:any = await utils.getTheUserRole(req);
+       if(list.user.status == 0){
+          return {
+            data: {},
+            code:-1,
+            message: "你账号已被禁用，请联系管理员！！",
+          }
+       }
+       console.log('list',list.user.status);
+       
         // 获取主题
         let db3 = await AppDataSource.getRepository(sqlMoudes.Theme).createQueryBuilder();
         db3.select(`
