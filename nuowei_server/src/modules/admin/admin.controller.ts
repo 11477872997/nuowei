@@ -56,7 +56,7 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '菜单管理获取',description:""})
-    getRouterSystemList( @Req() req, @Body() CreatePostDto:dto.UpUserInfoReq) {
+    getRouterSystemList( @Req() req, @Body() CreatePostDto) {
       return this.getRouterSystem.getRouterSystem(req,CreatePostDto);
     
     }

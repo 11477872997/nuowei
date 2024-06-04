@@ -7,7 +7,7 @@ export class GetRouterSystem {
 
   async getRouterSystem(req,body): Promise<object> {
     try {
-      
+        utils.getUserRole(req)
         return {
          
         }

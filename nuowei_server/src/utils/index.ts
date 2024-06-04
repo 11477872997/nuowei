@@ -200,3 +200,18 @@ export const getRouter = async (
     }
   });
 };
+
+
+/**
+ * 获取用户权限
+ */
+export const getUserRole = async (req: Request): Promise<object> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+    
+      resolve({ });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
