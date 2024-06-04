@@ -27,14 +27,9 @@ requestAxios.interceptors.response.use(
   (response) => {
     // 相应拦截
     let { data } = response;
+    console.log('data',response);
     if (data.code == -1) {
       Message.error(data.message || "请求异常！");
-      return Promise.reject(data);
-    }
-    if (data.code == 404) {
-      Message.error(data.message || "登陆失效！");
-      removeToken();
-      store.dispatch('user/logout');
       return Promise.reject(data);
     }
     try {
@@ -46,6 +41,17 @@ requestAxios.interceptors.response.use(
     return response;
   },
   (err) => {
+    let {data} = err.response;
+    console.log('err',err.response);
+    if (data.status == 401) {
+      Message.error(data.message || "登陆失效！");
+      removeToken();
+      store.dispatch('user/logout');
+      return Promise.reject(data);
+    }else{
+      Message.error(data.message || "登陆失效！");
+      return Promise.reject(data);
+    }
     Message.error("请求异常！！");
     return Promise.reject(err);
   }

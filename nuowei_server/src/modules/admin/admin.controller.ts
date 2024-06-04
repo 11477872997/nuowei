@@ -11,6 +11,7 @@ export class AdminController {
       private readonly getUserInfo: serverMode.GetUserInfo,
       private readonly getRouter: serverMode.GetRouter,
       private readonly upUserPwdInfo: serverMode.UpUserPwdInfo,
+      private readonly upUserInfo: serverMode.UpUserInfo,
     ){}
 
     @Post('login')
@@ -37,7 +38,14 @@ export class AdminController {
     @Post('upUserPwdInfo')
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '修改密码',description:"修改当前token用户密码"})
-    upInfoPwd(@Req() req, @Body() CreatePostDto:dto.UpUserPwdInfoReq) {
+    setUpInfoPwd(@Req() req, @Body() CreatePostDto:dto.UpUserPwdInfoReq) {
       return this.upUserPwdInfo.upInfoPwd(req,CreatePostDto);
+    }
+    @Post('upUserInfo')
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '修改我的信息',description:""})
+    setUpUserInfo( @Req() req, @Body() CreatePostDto:dto.UpUserInfoReq) {
+      return this.upUserInfo.upUserInfo(req,CreatePostDto);
+    
     }
 }

@@ -3,9 +3,11 @@ import {GetRouterList} from "./res/getRouter";
 
 import {LoginReqList} from "./req/login";
 import {UpUserPwdInfoList} from "./req/upUserPwdInfo";
+import {UpUserInfoList} from "./req/UpUserInfo";
 // 请求拦截注解和校验
 export class LoginReq extends LoginReqList {}
 export class UpUserPwdInfoReq extends UpUserPwdInfoList {}
+export class UpUserInfoReq extends UpUserInfoList {}
 
 // 响应注解
 export class LoginRes  extends LoginResList {}
