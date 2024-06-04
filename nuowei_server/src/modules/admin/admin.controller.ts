@@ -12,6 +12,7 @@ export class AdminController {
       private readonly getRouter: serverMode.GetRouter,
       private readonly upUserPwdInfo: serverMode.UpUserPwdInfo,
       private readonly upUserInfo: serverMode.UpUserInfo,
+      private readonly getRouterSystem: serverMode.GetRouterSystem,
     ){}
 
     @Post('login')
@@ -29,6 +30,7 @@ export class AdminController {
       return this.getUserInfo.getInfo(req);
     }
     @Post('getRouter')
+    @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '获取路由数据',description:"这是一个获取当前token用户路由数据侧边栏"})
     @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRouterRes })
@@ -36,16 +38,26 @@ export class AdminController {
       return this.getRouter.setRouter(req);
     }
     @Post('upUserPwdInfo')
+    @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '修改密码',description:"修改当前token用户密码"})
     setUpInfoPwd(@Req() req, @Body() CreatePostDto:dto.UpUserPwdInfoReq) {
       return this.upUserPwdInfo.upInfoPwd(req,CreatePostDto);
     }
     @Post('upUserInfo')
+    @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '修改我的信息',description:""})
     setUpUserInfo( @Req() req, @Body() CreatePostDto:dto.UpUserInfoReq) {
       return this.upUserInfo.upUserInfo(req,CreatePostDto);
+    
+    }
+    @Post('getRouterSystem')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '菜单管理获取',description:""})
+    getRouterSystemList( @Req() req, @Body() CreatePostDto:dto.UpUserInfoReq) {
+      return this.getRouterSystem.getRouterSystem(req,CreatePostDto);
     
     }
 }
