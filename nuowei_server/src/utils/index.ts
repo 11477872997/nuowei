@@ -208,7 +208,14 @@ export const getRouter = async (
 export const getUserRole = async (req: Request): Promise<object> => {
   return new Promise(async (resolve, reject) => {
     try {
-    
+    let {user} =  await  getTheUserRole(req) as any;
+    let result = await AppDataSource.query( `SELECT roles,role_key FROM roles WHERE FIND_IN_SET(id,'${user.id}')`);
+    if(!result.length) return resolve({
+      data:null,
+      code:-1,
+      message:'获取权限失败'
+    });
+      console.log('useInfo',result);
       resolve({ });
     } catch (error) {
       reject(error);
