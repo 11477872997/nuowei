@@ -42,7 +42,7 @@ export class GetRouterReq {
   @ApiPropertyOptional({ description: '权限字符'})
   roleKey: string
   @IsOptional()
-  @ApiPropertyOptional({ description: '菜单类型区分,F:按钮自动隐藏,C:子集,M:包含子集'})
+  @ApiPropertyOptional({ description: '菜单类型区分,F:按钮自动隐藏,C:菜单,M:包含子目录'})
   menuType: string
   @IsOptional()
   @ApiPropertyOptional({ description: '菜单名称'})
