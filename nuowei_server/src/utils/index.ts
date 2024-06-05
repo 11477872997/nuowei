@@ -52,7 +52,8 @@ export const codeStatus = (status: number): string => {
 };
 
 /**
- * 获取用户角色
+ * 获取用户信息
+ *  @param req Request
  */
 interface Request {
   user: {
@@ -61,42 +62,17 @@ interface Request {
     uid: string;
   };
 }
-export const getTheUserRole = async (req: Request): Promise<object> => {
+export const getUserInfo = async (req: Request): Promise<object> => {
   return new Promise(async (resolve, reject) => {
     try {
       const { name, pwd, uid } = req.user;
-      let db = await AppDataSource.getRepository(sqlMoudes.User).createQueryBuilder()
-      db.select(
-        'name,id,admin,status,url,admin,roles_id as rolesId',
-      );
+      let db = await AppDataSource.getRepository(
+        sqlMoudes.User,
+      ).createQueryBuilder();
+      db.select('name,id,admin,status,url,admin,roles_id as rolesId');
       db.where('id = :uid', { uid });
       const userInfo = await db.execute();
-      const { rolesId } = userInfo[0];
-      // 获取角色
-      let db2 = await AppDataSource.getRepository(sqlMoudes.Roles).createQueryBuilder()
-      db2.select('role_key as roleKey,roles as userRole');
-      db2.where(`FIND_IN_SET(id, :id)`, { id: rolesId });
-      const userRoles = await db2.execute();
-      let arrRoles = {
-        userRole: '',
-        roleKey: [],
-      };
-      userRoles.forEach((element) => {
-        arrRoles.userRole += (arrRoles.userRole ? ',' : '') + element.userRole;
-        arrRoles.roleKey.push(element.roleKey);
-      });
-      let roleAdmin = arrRoles.roleKey.some((t) => t === 'admin');
-      let data:any = {
-        ...arrRoles,
-        roleAdmin,
-      };
-      data.user =  userInfo[0]
-      resolve({
-        roleAdmin,
-        roleKey:arrRoles["roleKey"],
-        userRole:arrRoles["userRole"],
-        user:userInfo[0]
-      });
+      resolve({ ...userInfo[0] });
     } catch (error) {
       reject(error);
     }
@@ -104,6 +80,7 @@ export const getTheUserRole = async (req: Request): Promise<object> => {
 };
 /**
  *  获取路由数据
+ *  @param req Request
  */
 export const getRouter = async (
   req: Request,
@@ -112,7 +89,9 @@ export const getRouter = async (
   return new Promise(async (resolve, reject) => {
     try {
       const { name, pwd, uid } = req.user;
-      let db = await AppDataSource.getRepository(sqlMoudes.RouterMenu).createQueryBuilder()
+      let db = await AppDataSource.getRepository(
+        sqlMoudes.RouterMenu,
+      ).createQueryBuilder();
       db.select(
         `id,
          parent_id as parentId,
@@ -138,7 +117,7 @@ export const getRouter = async (
       db.orderBy('sort', 'ASC');
       db.addOrderBy('update_time', 'DESC');
       const menuRes = await db.execute();
-      const userRole: any = await getTheUserRole(req);
+      const userRole: any = await getUserRole(req);
       // //角色权限
       let roles = userRole.userRole.split(',');
 
@@ -185,38 +164,88 @@ export const getRouter = async (
         });
         return resArr;
       };
-      let routerMenu = filterAsyncRoutes(menuRes, 0, "");
-       //如果是独立的（一级）
-        sidebar&&routerMenu.forEach(t=>{
-          if(t.menuType==="C"&&(!t.children||t.children.length===0)){
-              t.layout=1;
-              t.children=[{...t, layout:0, alone:1, children:undefined,}]
-              t.path="/"+Math.random();
+      let routerMenu = filterAsyncRoutes(menuRes, 0, '');
+      //如果是独立的（一级）
+      sidebar &&
+        routerMenu.forEach((t) => {
+          if (t.menuType === 'C' && (!t.children || t.children.length === 0)) {
+            t.layout = 1;
+            t.children = [{ ...t, layout: 0, alone: 1, children: undefined }];
+            t.path = '/' + Math.random();
           }
-      });
-      resolve({routerMenu,routerArr});
+        });
+      resolve({ routerMenu, routerArr });
     } catch (error) {
       reject(error);
     }
   });
 };
 
-
 /**
  * 获取用户权限
+ *  @param req Request
  */
 export const getUserRole = async (req: Request): Promise<object> => {
   return new Promise(async (resolve, reject) => {
     try {
-    let {user} =  await  getTheUserRole(req) as any;
-    let result = await AppDataSource.query( `SELECT roles,role_key FROM roles WHERE FIND_IN_SET(id,'${user.id}')`);
-    if(!result.length) return resolve({
-      data:null,
-      code:-1,
-      message:'获取权限失败'
-    });
-      console.log('useInfo',result);
-      resolve({ });
+      let user = (await getUserInfo(req)) as any;
+      let result = await AppDataSource.query(
+        `SELECT roles,role_key FROM roles WHERE FIND_IN_SET(id,'${user.rolesId}')`,
+      );
+      if (!result.length)
+        return resolve({
+          user,
+          code: -1,
+          message: '获取权限失败',
+        });
+      let roles = result.map((t) => t.roles);
+      // 权限字符
+      let roleKey = result.map((t) => t.role_key);
+      //角色权限
+      let roleAdmin = roleKey.some((t) => t === 'admin');
+      resolve({
+        userRole: roles.join(','),
+        roleKey,
+        user,
+        roleAdmin,
+        code: 0,
+        message: '请求成功',
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+/**
+ * 菜单字符权限拦截
+ *  @param req Request
+ *  @param role  接口权限字符数组
+ *  @param admin  是否管理员也要遵守（默认否）
+ */
+export const checkPermi = async (
+  req: Request,
+  role: any,
+  admin = false,
+): Promise<object> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let userRole = (await getUserRole(req)) as any;
+      if ((userRole.roleAdmin || userRole.user.admin === 1) && !admin)
+        return resolve(userRole);
+      let result = (await AppDataSource.query(
+        `SELECT role_key AS roleKey FROM router_menu WHERE FIND_IN_SET(id,'${userRole.userRole}')`,
+      )) as any;
+      let roleKeyArr = result.map((t) => t.roleKey).filter((t) => t);
+      const hasPermission = role.some((permission) => {
+        return roleKeyArr.includes(permission);
+      });
+      if (!hasPermission)
+        return resolve({
+          code: -1,
+          message: '暂无此功能请求权限！',
+          data: null,
+        });
     } catch (error) {
       reject(error);
     }

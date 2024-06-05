@@ -47,7 +47,7 @@ export class AdminController {
     @Post('upUserInfo')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
-    @ApiOperation({ summary: '修改我的信息',description:""})
+    @ApiOperation({ summary: '修改我的信息',description:"修改当前token用户信息"})
     setUpUserInfo( @Req() req, @Body() CreatePostDto:dto.UpUserInfoReq) {
       return this.upUserInfo.upUserInfo(req,CreatePostDto);
     
@@ -55,7 +55,8 @@ export class AdminController {
     @Post('getRouterSystem')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
-    @ApiOperation({ summary: '菜单管理获取',description:""})
+    @ApiOperation({ summary: '菜单管理获取',description:"获取当前token用户菜单管理",})
+    @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRouterRes })
     getRouterSystemList( @Req() req, @Body() CreatePostDto) {
       return this.getRouterSystem.getRouterSystem(req,CreatePostDto);
     

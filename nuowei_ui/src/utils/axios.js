@@ -48,8 +48,11 @@ requestAxios.interceptors.response.use(
       removeToken();
       store.dispatch('user/logout');
       return Promise.reject(data);
+    }else if(data.status == 500){
+      Message.error(data.message || "服务器异常！");
+      return Promise.reject(data);
     }else{
-      Message.error(data.message || "登陆失效！");
+      Message.error(data.message || "请求异常！");
       return Promise.reject(data);
     }
     Message.error("请求异常！！");

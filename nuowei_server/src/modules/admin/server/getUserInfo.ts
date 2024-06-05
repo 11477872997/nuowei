@@ -8,7 +8,7 @@ export class GetUserInfo {
   async getInfo(req): Promise<object> {
     try {
        const {name,pwd,uid} = req.user;
-       const list:any = await utils.getTheUserRole(req);
+       const list:any = await utils.getUserRole(req);
        if(list.user.status == 0){
           return {
             data: {},
