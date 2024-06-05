@@ -14,6 +14,7 @@ export class AdminController {
       private readonly upUserInfo: serverMode.UpUserInfo,
       private readonly getRouterSystem: serverMode.GetRouterSystem,
       private readonly changeMenu: serverMode.ChangeMenu,
+      private readonly addMenu: serverMode.AddMenu,
     ){}
 
     @Post('login')
@@ -62,10 +63,18 @@ export class AdminController {
       return this.getRouterSystem.getRouterSystem(req,CreatePostDto);
     
     }
+    @Post('addMenu')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '菜单管理添加',description:"添加用户菜单管理",})
+    setaddMenu( @Req() req, @Body() CreatePostDto:dto.GetRouterReq) {
+      return this.addMenu.setAddMenu(req,CreatePostDto);
+    
+    }
     @Post('changeMenu')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
-    @ApiOperation({ summary: '菜单管理修复',description:"修改用户菜单管理",})
+    @ApiOperation({ summary: '菜单管理修改',description:"修改用户菜单管理",})
     setchangeMenu( @Req() req, @Body() CreatePostDto:dto.GetRouterReq) {
       return this.changeMenu.setChangeMenu(req,CreatePostDto);
     
