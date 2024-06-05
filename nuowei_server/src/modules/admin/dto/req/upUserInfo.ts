@@ -2,7 +2,7 @@ import { IsNotEmpty} from 'class-validator';
 import { ApiProperty} from '@nestjs/swagger';
 // ApiProperty 必填
 // 登录
-export class UpUserInfoList {
+export class UpUserInfoReq {
   @IsNotEmpty({ message: '密码必填' })
   @ApiProperty({ description: '密码',example: "" })
   readonly pwd: string;

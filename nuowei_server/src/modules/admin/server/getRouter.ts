@@ -1,6 +1,4 @@
 import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
-import * as sqlMoudes from "@utils/sql";
-import { AppDataSource } from "@config/dp";
 import * as utils from '@utils/index';
 @Injectable()
 export class GetRouter {

@@ -31,7 +31,7 @@ class User {
 
 }
 // 登录接口
-export class LoginResList {
+export class LoginRes {
     @ApiPropertyOptional({ description: '接口验证'})
     token: string
     @ApiPropertyOptional({ description: '角色key'})

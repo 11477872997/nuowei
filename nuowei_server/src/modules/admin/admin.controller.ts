@@ -13,6 +13,7 @@ export class AdminController {
       private readonly upUserPwdInfo: serverMode.UpUserPwdInfo,
       private readonly upUserInfo: serverMode.UpUserInfo,
       private readonly getRouterSystem: serverMode.GetRouterSystem,
+      private readonly changeMenu: serverMode.ChangeMenu,
     ){}
 
     @Post('login')
@@ -59,6 +60,14 @@ export class AdminController {
     @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRouterRes })
     getRouterSystemList( @Req() req, @Body() CreatePostDto) {
       return this.getRouterSystem.getRouterSystem(req,CreatePostDto);
+    
+    }
+    @Post('changeMenu')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '菜单管理修复',description:"修改用户菜单管理",})
+    setchangeMenu( @Req() req, @Body() CreatePostDto:dto.GetRouterReq) {
+      return this.changeMenu.setChangeMenu(req,CreatePostDto);
     
     }
 }

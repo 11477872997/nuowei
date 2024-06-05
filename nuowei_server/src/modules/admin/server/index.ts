@@ -4,3 +4,4 @@ export * from './getRouter';
 export * from './upUserPwdInfo';
 export * from './upUserInfo';
 export * from './getRouterSystem';
+export * from './changeMenu';

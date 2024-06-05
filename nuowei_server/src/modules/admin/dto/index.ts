@@ -1,14 +1,13 @@
-import {LoginResList} from "./res/login";
-import {GetRouterList} from "./res/getRouter";
+// 相应注解和校验
+export  * from "./res/login";
+export *  from "./res/getRouter";
 
-import {LoginReqList} from "./req/login";
-import {UpUserPwdInfoList} from "./req/upUserPwdInfo";
-import {UpUserInfoList} from "./req/UpUserInfo";
+
 // 请求拦截注解和校验
-export class LoginReq extends LoginReqList {}
-export class UpUserPwdInfoReq extends UpUserPwdInfoList {}
-export class UpUserInfoReq extends UpUserInfoList {}
+export * from "./req/login";
+export * from "./req/upUserPwdInfo";
+export * from "./req/UpUserInfo";
+export * from "./req/getRouter";
 
-// 响应注解
-export class LoginRes  extends LoginResList {}
-export class GetRouterRes  extends GetRouterList {}
+
+
