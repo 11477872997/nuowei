@@ -41,7 +41,8 @@ export class ChangeMenu {
          meta ='${JSON.stringify(body.meta)}' 
          WHERE id= '${body.id}'`);
       return {
-        code: 0, data: resData, 
+        code: 0,
+        data: resData, 
         message: '修改成功！'
       };
     } catch (error) {

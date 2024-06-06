@@ -12,3 +12,4 @@ export * from './menu/delMenu';
 // 角色管理
 export * from './roles/getRoles';
 export * from './roles/addRoles';
+export * from './roles/upRoles';

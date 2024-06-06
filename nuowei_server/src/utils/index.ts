@@ -263,3 +263,27 @@ export const  judgeUserName = async(sql:string,sqlName="name", name: string) =>{
   if (result[0][sqlName] == name) return -1;
   return 1;
 }
+/**
+  * 是否操作的是角色总管理员
+  *  @param id  查询条件id
+ */
+export const upAdminRole = async(id:string) =>{
+  let sql = `SELECT role_key FROM roles WHERE id= '${id}'`;
+  let result = await AppDataSource.query(sql) as any;
+  if(result.length === 0) {
+      return {
+        code:-1,
+        msg:"管理信息判断错误！！",
+        data:null
+      }
+  }
+  if(result[0].role_key === "admin" ) {
+    return {
+        code:-1,
+        msg:"无法对《角色总管理》执行此操作！",
+        data:null
+      }
+    
+  }
+  return result;
+}

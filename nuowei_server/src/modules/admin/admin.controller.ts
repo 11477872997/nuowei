@@ -19,6 +19,7 @@ export class AdminController {
       private readonly delMenu: serverMode.DelMenu,
       private readonly getRoles: serverMode.GetRoles,
       private readonly addRoles: serverMode.AddRoles,
+      private readonly upRoles: serverMode.UpRoles,
       
     ){ }
 
@@ -109,6 +110,13 @@ export class AdminController {
     @ApiOperation({ summary: '添加角色管理',description:"",})
     setaddRoles( @Req() req, @Body() CreatePostDto:dto.AddRolesReq) {
       return this.addRoles.setaddRoles(req,CreatePostDto);
+    }
+    @Post('upRoles')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '修改角色管理',description:"",})
+    setupRoles( @Req() req, @Body() CreatePostDto:dto.upRolesReq) {
+      return this.upRoles.setupRoles(req,CreatePostDto);
     }
 
 
