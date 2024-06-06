@@ -8,7 +8,7 @@ export class AddMenu {
   async setAddMenu(req, body): Promise<object> {
     try {
       let res = (await utils.checkPermi(req, [
-        systemSettings.menus.menuUp,
+        systemSettings.menus.menuAdd,
       ])) as any;
       if (res.code == -1)
         return { code: res.code, data: res.data, message: res.message };

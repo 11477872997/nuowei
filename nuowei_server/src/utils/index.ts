@@ -251,3 +251,15 @@ export const checkPermi = async (
     }
   });
 };
+
+/**
+  * 判断修改的名称是否和修改前的一样
+  * @param sql  sql语句
+  * @param sqlName  修改前的属性名
+  * @param name  修改后的值
+ */
+export const  judgeUserName = async(sql:string,sqlName="name", name: string) =>{
+  let result = await AppDataSource.query(sql) as any;
+  if (result[0][sqlName] == name) return -1;
+  return 1;
+}
