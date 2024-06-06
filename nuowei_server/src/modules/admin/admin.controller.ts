@@ -22,6 +22,7 @@ export class AdminController {
       private readonly addRoles: serverMode.AddRoles,
       private readonly upRoles: serverMode.UpRoles,
       private readonly delRoles: serverMode.DelRoles,
+      private readonly getUser: serverMode.GetUser,
       
     ){ }
 
@@ -134,6 +135,13 @@ export class AdminController {
     @ApiOperation({ summary: '删除角色管理',description:"",})
     setDelRoles( @Req() req, @Body() CreatePostDto:dto.delReq) {
       return this.delRoles.setDelRoles(req,CreatePostDto);
+    }
+    @Post('getUser')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '获取用户管理分页列表',description:"",})
+    GetUser( @Req() req, @Body() CreatePostDto:dto.GetUserReq) {
+      return this.getUser.GetUser(req,CreatePostDto);
     }
 
 

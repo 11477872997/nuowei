@@ -8,7 +8,7 @@ export class GetRoles {
 
   async GetRoles(req,body): Promise<object> {
     try {
-      let res  = await utils.checkPermi(req ,[systemSettings.menus.menuQuery]) as any;
+      let res  = await utils.checkPermi(req ,[systemSettings.role.roleQuery]) as any;
       if(res.code == -1 ) return res;
     const db = await AppDataSource.getRepository(sqlMoudes.Roles).createQueryBuilder('role')
     .select([

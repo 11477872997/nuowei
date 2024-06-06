@@ -7,7 +7,7 @@ export class UpRoles {
 
   async setupRoles(req,body): Promise<object> {
     try {
-      let res  = await utils.checkPermi(req ,[systemSettings.menus.menuQuery]) as any;
+      let res  = await utils.checkPermi(req ,[systemSettings.role.roleUp]) as any;
       if(res.code == -1 ) return res;
       //总管理不能操作
      let resadmin  =  await  utils.upAdminRole(body.id);

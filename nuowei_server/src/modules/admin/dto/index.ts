@@ -14,6 +14,7 @@ export * from "./req/del";
 export * from "./req/getRoles";
 export * from "./req/addRoles";
 export * from "./req/upRoles";
+export * from "./req/getUser";
 
 
 

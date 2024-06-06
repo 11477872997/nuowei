@@ -8,7 +8,7 @@ export class AddRoles {
 
   async setaddRoles(req,body): Promise<object> {
     try {
-      let res  = await utils.checkPermi(req ,[systemSettings.menus.menuQuery]) as any;
+      let res  = await utils.checkPermi(req ,[systemSettings.role.roleAdd]) as any;
       if(res.code == -1 ) return res;
       let roleKey = await AppDataSource.query(
         ` SELECT id FROM roles WHERE role_key = '${body.roleKey}' `,
