@@ -17,6 +17,7 @@ export class AdminController {
       private readonly changeMenu: serverMode.ChangeMenu,
       private readonly addMenu: serverMode.AddMenu,
       private readonly delMenu: serverMode.DelMenu,
+      private readonly getRolesAll: serverMode.GetRolesAll,
       private readonly getRoles: serverMode.GetRoles,
       private readonly addRoles: serverMode.AddRoles,
       private readonly upRoles: serverMode.UpRoles,
@@ -97,10 +98,18 @@ export class AdminController {
       return this.delMenu.setDelMenu(req,CreatePostDto);
     }
 
+    @Post('getRolesAll')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '获取角色管理全部列表',description:"",})
+    @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRolesRes })
+    GetRolesAll() {
+      return this.getRolesAll.getRolesAll();
+    }
     @Post('getRoles')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
-    @ApiOperation({ summary: '获取角色管理列表',description:"",})
+    @ApiOperation({ summary: '获取角色管理分页列表',description:"",})
     @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRolesRes })
     GetRoles( @Req() req, @Body() CreatePostDto:dto.GetRolesReq) {
       return this.getRoles.GetRoles(req,CreatePostDto);
