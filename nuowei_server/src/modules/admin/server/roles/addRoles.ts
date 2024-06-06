@@ -28,7 +28,7 @@ export class AddRoles {
         name:body.name,
         role_key:body.roleKey,
         roles:body.roles,
-        checked_roles:body.roles,
+        checked_roles:''
         }])
       .execute();
       return {

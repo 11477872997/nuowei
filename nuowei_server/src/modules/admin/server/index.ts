@@ -13,3 +13,4 @@ export * from './menu/delMenu';
 export * from './roles/getRoles';
 export * from './roles/addRoles';
 export * from './roles/upRoles';
+export * from './roles/delRoles';

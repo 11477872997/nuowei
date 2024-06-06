@@ -20,6 +20,7 @@ export class AdminController {
       private readonly getRoles: serverMode.GetRoles,
       private readonly addRoles: serverMode.AddRoles,
       private readonly upRoles: serverMode.UpRoles,
+      private readonly delRoles: serverMode.DelRoles,
       
     ){ }
 
@@ -92,7 +93,7 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '菜单管理删除',description:"",})
-    setdelMenu( @Req() req, @Body() CreatePostDto:dto.DelMenuReq) {
+    setdelMenu( @Req() req, @Body() CreatePostDto:dto.delReq) {
       return this.delMenu.setDelMenu(req,CreatePostDto);
     }
 
@@ -117,6 +118,13 @@ export class AdminController {
     @ApiOperation({ summary: '修改角色管理',description:"",})
     setupRoles( @Req() req, @Body() CreatePostDto:dto.upRolesReq) {
       return this.upRoles.setupRoles(req,CreatePostDto);
+    }
+    @Post('delRoles')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '删除角色管理',description:"",})
+    setDelRoles( @Req() req, @Body() CreatePostDto:dto.delReq) {
+      return this.delRoles.setDelRoles(req,CreatePostDto);
     }
 
 
