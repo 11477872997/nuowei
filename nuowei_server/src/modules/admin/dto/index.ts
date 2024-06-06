@@ -10,6 +10,7 @@ export * from "./req/UpUserInfo";
 export * from "./req/getRouter";
 export * from "./req/changeMenu";
 export * from "./req/delMenu";
+export * from "./req/getRoles";
 
 
 

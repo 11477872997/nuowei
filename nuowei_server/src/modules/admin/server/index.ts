@@ -1,9 +1,13 @@
-export * from './getUserInfo';
 export * from './login';
-export * from './getRouter';
-export * from './upUserPwdInfo';
-export * from './upUserInfo';
-export * from './getRouterSystem';
-export * from './addMenu';
-export * from './changeMenu';
-export * from './delMenu';
+// 用户信息
+export * from './user/getUserInfo';
+export * from './user/getRouter';
+export * from './user/upUserPwdInfo';
+export * from './user/upUserInfo';
+// 菜单管理
+export * from './menu/getRouterSystem';
+export * from './menu/addMenu';
+export * from './menu/changeMenu';
+export * from './menu/delMenu';
+// 角色管理
+export * from './roles/getRoles';

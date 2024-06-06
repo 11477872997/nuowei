@@ -6,7 +6,7 @@ import {GetRouterReq} from "./getRouter";
 // 登录
 export class delMenu  {
   @IsNotEmpty({ message: 'id必填' })
-  @ApiProperty({ description: 'id',example: "",required: true  })
+  @ApiProperty({ description: '当前列表id',example: "",required: true  })
   readonly id: string;
 
 }
