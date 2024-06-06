@@ -1,4 +1,4 @@
-import { Controller,Post,Get,Body,UseGuards,Req,Module, DynamicModule} from '@nestjs/common';
+import { Controller,Post,Get,Body,UseGuards,Req,Module, DynamicModule,Inject } from '@nestjs/common';
 import { ApiTags,ApiOperation,ApiResponse,ApiBearerAuth } from '@nestjs/swagger';
 import  * as dto from "./dto";
 import  * as serverMode from './server';
@@ -16,7 +16,12 @@ export class AdminController {
       private readonly getRouterSystem: serverMode.GetRouterSystem,
       private readonly changeMenu: serverMode.ChangeMenu,
       private readonly addMenu: serverMode.AddMenu,
-    ){}
+      private readonly delMenu: serverMode.DelMenu,
+      
+    ){
+     
+    }
+
 
     @Post('login')
     @ApiOperation({ summary: '登录',description:"这是一个系统登录接口"})
@@ -67,7 +72,7 @@ export class AdminController {
     @Post('addMenu')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
-    @ApiOperation({ summary: '菜单管理添加',description:"添加用户菜单管理",})
+    @ApiOperation({ summary: '菜单管理添加',description:"添加菜单管理",})
     setaddMenu( @Req() req, @Body() CreatePostDto:dto.GetRouterReq) {
       return this.addMenu.setAddMenu(req,CreatePostDto);
     
@@ -75,9 +80,17 @@ export class AdminController {
     @Post('changeMenu')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
-    @ApiOperation({ summary: '菜单管理修改',description:"修改用户菜单管理",})
+    @ApiOperation({ summary: '菜单管理修改',description:"修改菜单管理",})
     setchangeMenu( @Req() req, @Body() CreatePostDto:dto.ChangeMenu) {
       return this.changeMenu.setChangeMenu(req,CreatePostDto);
+    
+    }
+    @Post('delMenu')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '菜单管理删除',description:"删除菜单管理",})
+    setdelMenu( @Req() req, @Body() CreatePostDto:dto.delMenu) {
+      return this.delMenu.setDelMenu(req,CreatePostDto);
     
     }
 }

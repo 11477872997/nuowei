@@ -6,3 +6,4 @@ export * from './upUserInfo';
 export * from './getRouterSystem';
 export * from './addMenu';
 export * from './changeMenu';
+export * from './delMenu';

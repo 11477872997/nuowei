@@ -9,6 +9,7 @@ export * from "./req/upUserPwdInfo";
 export * from "./req/UpUserInfo";
 export * from "./req/getRouter";
 export * from "./req/changeMenu";
+export * from "./req/delMenu";
 
 
 
