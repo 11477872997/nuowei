@@ -18,6 +18,7 @@ export class AdminController {
       private readonly addMenu: serverMode.AddMenu,
       private readonly delMenu: serverMode.DelMenu,
       private readonly getRoles: serverMode.GetRoles,
+      private readonly addRoles: serverMode.AddRoles,
       
     ){ }
 
@@ -73,7 +74,7 @@ export class AdminController {
     @Post('addMenu')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
-    @ApiOperation({ summary: '菜单管理添加',description:"添加菜单管理",})
+    @ApiOperation({ summary: '菜单管理添加',description:"",})
     setaddMenu( @Req() req, @Body() CreatePostDto:dto.GetRouterReq) {
       return this.addMenu.setAddMenu(req,CreatePostDto);
     }
@@ -81,26 +82,33 @@ export class AdminController {
     @Post('changeMenu')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
-    @ApiOperation({ summary: '菜单管理修改',description:"修改菜单管理",})
-    setchangeMenu( @Req() req, @Body() CreatePostDto:dto.ChangeMenu) {
+    @ApiOperation({ summary: '菜单管理修改',description:"",})
+    setchangeMenu( @Req() req, @Body() CreatePostDto:dto.ChangeMenuReq) {
       return this.changeMenu.setChangeMenu(req,CreatePostDto);
     }
 
     @Post('delMenu')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
-    @ApiOperation({ summary: '菜单管理删除',description:"删除菜单管理",})
-    setdelMenu( @Req() req, @Body() CreatePostDto:dto.delMenu) {
+    @ApiOperation({ summary: '菜单管理删除',description:"",})
+    setdelMenu( @Req() req, @Body() CreatePostDto:dto.DelMenuReq) {
       return this.delMenu.setDelMenu(req,CreatePostDto);
     }
 
     @Post('getRoles')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
-    @ApiOperation({ summary: '获取角色管理列表',description:"删除菜单管理",})
+    @ApiOperation({ summary: '获取角色管理列表',description:"",})
     @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRolesRes })
     GetRoles( @Req() req, @Body() CreatePostDto:dto.GetRolesReq) {
       return this.getRoles.GetRoles(req,CreatePostDto);
+    }
+    @Post('addRoles')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '添加角色管理',description:"",})
+    setaddRoles( @Req() req, @Body() CreatePostDto:dto.AddRolesReq) {
+      return this.addRoles.setaddRoles(req,CreatePostDto);
     }
 
 

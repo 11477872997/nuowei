@@ -9,7 +9,7 @@ export class GetRoles {
   async GetRoles(req,body): Promise<object> {
     try {
       let res  = await utils.checkPermi(req ,[systemSettings.menus.menuQuery]) as any;
-      if(res.code == -1 ) return { code:res.code, data:res.data, message:res.message};
+      if(res.code == -1 ) return res;
     const db = await AppDataSource.getRepository(sqlMoudes.Roles).createQueryBuilder('role')
     .select([
         'role.id as id',
@@ -17,8 +17,8 @@ export class GetRoles {
         'role.roles as roles',
         'role.checked_roles AS checkedRoles',
         'role.role_key AS roleKey',
-        'role.update_time AS updateTime',
-        'role.create_time AS createTime'
+        "DATE_FORMAT(role.update_time, '%Y-%m-%d %H:%i:%s') AS updateTime",
+        "DATE_FORMAT(role.create_time, '%Y-%m-%d %H:%i:%s') AS createTime"
     ]);
     if(body.name){
         db.where("name LIKE :name",{name: `%${body.name}%`} )
@@ -28,7 +28,8 @@ export class GetRoles {
       return {
         code:0,
         message:'请求成功',
-        data:dataRes
+        data:dataRes,
+        total:dataRes.length
       }
        
     } catch (error) {

@@ -10,7 +10,7 @@ export class DelMenu {
       let res = (await utils.checkPermi(req, [
         systemSettings.menus.menuDelte,
       ])) as any;
-      if (res.code == -1) return { code: res.code, data: res.data, message: res.message };
+      if(res.code == -1 ) return res;
         let id = await AppDataSource.query(
           `SELECT id FROM router_menu WHERE parent_id = '${body.id}' `,
         );

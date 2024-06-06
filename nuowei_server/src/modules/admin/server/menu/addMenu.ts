@@ -10,8 +10,7 @@ export class AddMenu {
       let res = (await utils.checkPermi(req, [
         systemSettings.menus.menuAdd,
       ])) as any;
-      if (res.code == -1)
-        return { code: res.code, data: res.data, message: res.message };
+      if(res.code == -1 ) return res;
       if(body.roleKey){
         let role_key = await AppDataSource.query(
           `SELECT id FROM router_menu WHERE role_key = '${body.roleKey}' `,

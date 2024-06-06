@@ -8,7 +8,7 @@ export class ChangeMenu {
   async setChangeMenu(req, body): Promise<object> {
     try {
       let res = (await utils.checkPermi(req, [ systemSettings.menus.menuUp])) as any;
-      if (res.code == -1)return { code: res.code, data: res.data, message: res.message };
+      if(res.code == -1 ) return res;
        let role_key = await utils.judgeUserName(`SELECT role_key FROM router_menu WHERE  id = '${body.id}' `,'role_key',body.roleKey);
        if(role_key == 1){
           let resultId = await AppDataSource.query(`SELECT id FROM router_menu WHERE  role_key = '${body.roleKey}' `) as any;

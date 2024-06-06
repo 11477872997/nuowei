@@ -7,7 +7,7 @@ export class GetRouterSystem {
   async getRouterSystem(req,body): Promise<object> {
     try {
       let res  = await utils.checkPermi(req ,[systemSettings.menus.menuQuery]) as any;
-      if(res.code == -1 ) return { code:res.code, data:res.data, message:res.message};
+      if(res.code == -1 ) return res;
       let {routerMenu}  = await utils.getRouter(req) as any;
       return {
         code:0,
