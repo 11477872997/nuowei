@@ -3,7 +3,7 @@ import { ApiProperty,ApiPropertyOptional} from '@nestjs/swagger';
 // ApiProperty 必填
 // ApiPropertyOptional 不是必填
 // 登录
-export class GetRoles {
+export class GetRolesReq {
   @IsNotEmpty({ message: 'page必填' })
   @ApiProperty({ description: '当前第几页',example: "1",required: true  })
   readonly page: number;

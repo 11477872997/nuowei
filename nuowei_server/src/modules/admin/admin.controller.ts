@@ -98,7 +98,8 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '获取角色管理列表',description:"删除菜单管理",})
-    GetRoles( @Req() req, @Body() CreatePostDto:dto.GetRoles) {
+    @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRolesRes })
+    GetRoles( @Req() req, @Body() CreatePostDto:dto.GetRolesReq) {
       return this.getRoles.GetRoles(req,CreatePostDto);
     }
 

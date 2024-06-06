@@ -1,6 +1,7 @@
 // 相应注解和校验
 export  * from "./res/login";
 export *  from "./res/getRouter";
+export *  from "./res/getRoles";
 
 
 // 请求拦截注解和校验
