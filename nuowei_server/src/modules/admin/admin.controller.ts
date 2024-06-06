@@ -3,6 +3,7 @@ import { ApiTags,ApiOperation,ApiResponse,ApiBearerAuth } from '@nestjs/swagger'
 import  * as dto from "./dto";
 import  * as serverMode from './server';
 import { AuthGuard } from '@nestjs/passport';
+
 @ApiTags("系统接口")
 @Controller('admin')
 export class AdminController {
@@ -75,8 +76,9 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '菜单管理修改',description:"修改用户菜单管理",})
-    setchangeMenu( @Req() req, @Body() CreatePostDto:dto.GetRouterReq) {
+    setchangeMenu( @Req() req, @Body() CreatePostDto:dto.ChangeMenu) {
       return this.changeMenu.setChangeMenu(req,CreatePostDto);
     
     }
 }
+

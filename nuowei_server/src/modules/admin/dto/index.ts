@@ -8,6 +8,7 @@ export * from "./req/login";
 export * from "./req/upUserPwdInfo";
 export * from "./req/UpUserInfo";
 export * from "./req/getRouter";
+export * from "./req/changeMenu";
 
 
 
