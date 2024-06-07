@@ -10,7 +10,6 @@ export class GetUser {
     try {
       let res  = await utils.checkPermi(req ,[systemSettings.user.userQuery]) as any;
       if(res.code == -1 ) return res;
-      // const offset = (page - 1) * pageSize;
     let query = `
       SELECT 
         a.id AS id,

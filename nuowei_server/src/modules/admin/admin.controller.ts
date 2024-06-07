@@ -9,20 +9,26 @@ import { AuthGuard } from '@nestjs/passport';
 export class AdminController {
     constructor(
       private readonly loginService: serverMode.LoginService,
+      // 用户信息
       private readonly getUserInfo: serverMode.GetUserInfo,
       private readonly getRouter: serverMode.GetRouter,
       private readonly upUserPwdInfo: serverMode.UpUserPwdInfo,
       private readonly upUserInfo: serverMode.UpUserInfo,
+      // 菜单管理
       private readonly getRouterSystem: serverMode.GetRouterSystem,
       private readonly changeMenu: serverMode.ChangeMenu,
       private readonly addMenu: serverMode.AddMenu,
       private readonly delMenu: serverMode.DelMenu,
+      // 角色管理
       private readonly getRolesAll: serverMode.GetRolesAll,
       private readonly getRoles: serverMode.GetRoles,
       private readonly addRoles: serverMode.AddRoles,
       private readonly upRoles: serverMode.UpRoles,
       private readonly delRoles: serverMode.DelRoles,
+      // 用户管理
       private readonly getUser: serverMode.GetUser,
+      // 多账号管理
+      private readonly getMoreAll: serverMode.GetMoreAll,
       
     ){ }
 
@@ -32,6 +38,7 @@ export class AdminController {
     setlogin(@Body() CreatePostDto:dto.LoginReq) {
       return this.loginService.setlogin(CreatePostDto);
     }
+ // 用户信息
     @Post('getUserInfo')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
@@ -65,7 +72,7 @@ export class AdminController {
     setRouter(@Req() req) {
       return this.getRouter.setRouter(req);
     }
-
+// 菜单管理
     @Post('getRouterSystem')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
@@ -98,7 +105,7 @@ export class AdminController {
     setdelMenu( @Req() req, @Body() CreatePostDto:dto.delReq) {
       return this.delMenu.setDelMenu(req,CreatePostDto);
     }
-
+// 角色管理
     @Post('getRolesAll')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
@@ -136,6 +143,7 @@ export class AdminController {
     setDelRoles( @Req() req, @Body() CreatePostDto:dto.delReq) {
       return this.delRoles.setDelRoles(req,CreatePostDto);
     }
+// 用户管理    
     @Post('getUser')
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
@@ -143,7 +151,14 @@ export class AdminController {
     GetUser( @Req() req, @Body() CreatePostDto:dto.GetUserReq) {
       return this.getUser.GetUser(req,CreatePostDto);
     }
-
-
+// 多账号管理
+    @Post('getMoreAll')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '获取多账号所有列表',description:"",})
+    @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRolesRes })
+    GetMoreAll() {
+      return this.getMoreAll.getMoreAll();
+    }
 }
 

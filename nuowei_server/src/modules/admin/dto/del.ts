@@ -1,6 +1,5 @@
 import { IsNotEmpty} from 'class-validator';
 import { ApiProperty} from '@nestjs/swagger';
-import {GetRouterReq} from "./getRouter";
 // ApiProperty 必填
 // ApiPropertyOptional 不是必填
 // 登录
