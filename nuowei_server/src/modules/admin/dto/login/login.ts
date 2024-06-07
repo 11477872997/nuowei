@@ -2,7 +2,7 @@ import { ApiPropertyOptional,ApiProperty} from '@nestjs/swagger';
 import { IsNotEmpty} from 'class-validator';
 // ApiProperty 必填
 // ApiPropertyOptional 不是必填
- class Theme {
+export class Theme {
   @ApiPropertyOptional({ description: '默认背景'})
   menuBg: string
   @ApiPropertyOptional({ description: '展开背景'})
@@ -17,7 +17,7 @@ import { IsNotEmpty} from 'class-validator';
   menuHoverBg: string
 
 }
-class User {
+export class User {
   @ApiPropertyOptional({ description: '名称'})
   name: string
   @ApiPropertyOptional({ description: 'id'})

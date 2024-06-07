@@ -148,6 +148,7 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '获取用户管理分页列表',description:"",})
+    @ApiResponse({ status: 200, description: '字段描述', type: dto.GetUserRes })
     GetUser( @Req() req, @Body() CreatePostDto:dto.GetUserReq) {
       return this.getUser.GetUser(req,CreatePostDto);
     }
