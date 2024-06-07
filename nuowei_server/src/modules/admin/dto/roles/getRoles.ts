@@ -1,8 +1,6 @@
 import { IsNotEmpty,IsOptional} from 'class-validator';
 import { ApiProperty,ApiPropertyOptional} from '@nestjs/swagger';
-// ApiProperty 必填
-// ApiPropertyOptional 不是必填
-// 登录
+// 请求
 export class GetRolesReq {
   @IsNotEmpty({ message: 'page必填' })
   @ApiProperty({ description: '当前第几页',example: "1",required: true  })
@@ -16,7 +14,7 @@ export class GetRolesReq {
 
 }
 
-
+// 相应
 export class GetRolesRes {
   @ApiPropertyOptional({ description: '编号'})
   id: string

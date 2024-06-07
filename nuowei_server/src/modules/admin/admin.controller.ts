@@ -156,7 +156,7 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '获取多账号所有列表',description:"",})
-    @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRolesRes })
+    @ApiResponse({ status: 200, description: '字段描述', type: dto.GetMoreAllRes })
     GetMoreAll() {
       return this.getMoreAll.getMoreAll();
     }
