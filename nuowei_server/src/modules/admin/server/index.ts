@@ -17,6 +17,7 @@ export * from './roles/upRoles';
 export * from './roles/delRoles';
 // 用户管理
 export * from './user/getUser';
+export * from './user/addUser';
 
 // 多账号管理
 export * from './more/getMoreAll';

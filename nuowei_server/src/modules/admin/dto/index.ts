@@ -12,6 +12,7 @@ export * from "./roles/addRoles";
 export * from "./roles/upRoles";
 // 用户管理
 export * from "./user/getUser";
+export * from "./user/addUser";
 // 多账号管理
 export * from './more/getMoreAll';
 // 通用

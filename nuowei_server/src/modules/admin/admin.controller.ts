@@ -27,6 +27,7 @@ export class AdminController {
       private readonly delRoles: serverMode.DelRoles,
       // 用户管理
       private readonly getUser: serverMode.GetUser,
+      private readonly addUser: serverMode.AddUser,
       // 多账号管理
       private readonly getMoreAll: serverMode.GetMoreAll,
       
@@ -151,6 +152,14 @@ export class AdminController {
     @ApiResponse({ status: 200, description: '字段描述', type: dto.GetUserRes })
     GetUser( @Req() req, @Body() CreatePostDto:dto.GetUserReq) {
       return this.getUser.GetUser(req,CreatePostDto);
+    }
+    @Post('addUser')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '添加用户管理',description:"",})
+    // @ApiResponse({ status: 200, description: '字段描述', type: dto.GetUserRes })
+    setAddUser( @Req() req, @Body() CreatePostDto:dto.AdduserReq) {
+      return this.addUser.setAddUser(req,CreatePostDto);
     }
 // 多账号管理
     @Post('getMoreAll')

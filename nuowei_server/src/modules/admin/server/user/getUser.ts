@@ -1,16 +1,17 @@
-import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
-import * as sqlMoudes from "@utils/sql";
-import { AppDataSource } from "@config/dp";
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import * as sqlMoudes from '@utils/sql';
+import { AppDataSource } from '@config/dp';
 import * as utils from '@utils/index';
-import {systemSettings} from '@utils/setting';
+import { systemSettings } from '@utils/setting';
 @Injectable()
 export class GetUser {
-
-  async GetUser(req,body): Promise<object> {
+  async GetUser(req, body): Promise<object> {
     try {
-      let res  = await utils.checkPermi(req ,[systemSettings.user.userQuery]) as any;
-      if(res.code == -1 ) return res;
-    let query = `
+      let res = (await utils.checkPermi(req, [
+        systemSettings.user.userQuery,
+      ])) as any;
+      if (res.code == -1) return res;
+      let query = `
       SELECT 
         a.id AS id,
         name,
@@ -33,23 +34,19 @@ export class GetUser {
         JOIN theme b ON a.id=b.user_id 
       WHERE 1=1
   `;
-    if(body.name){
-       query +=  "name LIKE :name",{name: `%${body.name}%`}
-    }
-    query  +=  `LIMIT ${body.size} OFFSET ${(body.page - 1) * body.size} `;
-    const results = await AppDataSource.query(query);
-      return {
-        code:0,
-        message:'请求成功',
-        data:results,
-        total:results.length
+      if (body.name) {
+        (query += 'name LIKE :name'), { name: `%${body.name}%` };
       }
-       
+      query += `LIMIT ${body.size} OFFSET ${(body.page - 1) * body.size} `;
+      const results = await AppDataSource.query(query);
+      return {
+        code: 0,
+        message: '请求成功',
+        data: results,
+        total: results.length,
+      };
     } catch (error) {
-        console.log('error',error);
-        
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
-      return error;
     }
-     }
+  }
 }
