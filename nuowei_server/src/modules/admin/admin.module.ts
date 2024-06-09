@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AdminController } from './admin.controller';
+import * as Modes from './admin.controller';
 import  * as serverMode from './server';
 import {  JwtModule } from '@nestjs/jwt';
 import { disposition} from '@config/index';
@@ -17,7 +17,7 @@ import { JwtStrategy} from '@config/jwt';
   providers: [JwtModule,
     ...Object.values(serverMode), 
     JwtStrategy],
-  controllers: [AdminController]
+  controllers: [...Object.values(Modes)]
 })
 
 export class AdminModule {}
