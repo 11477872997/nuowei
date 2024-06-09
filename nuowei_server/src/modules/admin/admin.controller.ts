@@ -16,7 +16,6 @@ export class AdminController {
     setlogin(@Body() CreatePostDto:dto.LoginReq) {
       return this.loginService.setlogin(CreatePostDto);
     }
-  
 }
 
 @ApiTags("用户信息")
@@ -135,7 +134,7 @@ export class RolesController {
   @ApiOperation({ summary: '获取角色管理分页列表',description:"",})
   @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRolesRes })
   GetRoles( @Req() req, @Body() CreatePostDto:dto.GetRolesReq) {
-    return this.getRoles.GetRoles(req,CreatePostDto);
+    return this.getRoles.getRolesList(req,CreatePostDto);
   }
   @Post('addRoles')
   @ApiBearerAuth()
@@ -177,7 +176,7 @@ export class UserController {
   @ApiOperation({ summary: '获取用户管理分页列表',description:"",})
   @ApiResponse({ status: 200, description: '字段描述', type: dto.GetUserRes })
   GetUser( @Req() req, @Body() CreatePostDto:dto.GetUserReq) {
-    return this.getUser.GetUser(req,CreatePostDto);
+    return this.getUser.getUserList(req,CreatePostDto);
   }
   @Post('addUser')
   @ApiBearerAuth()
@@ -220,6 +219,7 @@ export class UserController {
 export class MoreController {
   constructor(
     private readonly getMoreAll: serverMode.GetMoreAll,
+    private readonly getMore: serverMode.GetMore,
   ){ }
   @Post('getMoreAll')
   @ApiBearerAuth()
@@ -228,6 +228,14 @@ export class MoreController {
   @ApiResponse({ status: 200, description: '字段描述', type: dto.GetMoreAllRes })
   GetMoreAll() {
     return this.getMoreAll.getMoreAll();
+  }
+  @Post('getMore')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '获取多账号管理分页列表',description:"",})
+  @ApiResponse({ status: 200, description: '字段描述', type: dto.GetMoreRes })
+  GetMore( @Req() req, @Body() CreatePostDto:dto.GetMoreReq) {
+    return this.getMore.getMoreList(req,CreatePostDto);
   }
 }
 

@@ -5,7 +5,7 @@ import * as utils from '@utils/index';
 import { systemSettings } from '@utils/setting';
 @Injectable()
 export class GetUser {
-  async GetUser(req, body): Promise<object> {
+  async getUserList(req, body): Promise<object> {
     try {
       let res = (await utils.checkPermi(req, [
         systemSettings.user.userQuery,
