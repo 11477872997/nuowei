@@ -29,6 +29,7 @@ export class AdminController {
       private readonly getUser: serverMode.GetUser,
       private readonly addUser: serverMode.AddUser,
       private readonly upUser: serverMode.UpUser,
+      private readonly delUser: serverMode.DelUser,
       private readonly upUserPwd: serverMode.UpUserPwd,
       // 多账号管理
       private readonly getMoreAll: serverMode.GetMoreAll,
@@ -168,6 +169,13 @@ export class AdminController {
     @ApiOperation({ summary: '修改用户管理',description:"",})
     setUpUser( @Req() req, @Body() CreatePostDto:dto.UpUserReq) {
       return this.upUser.setUpUser(req,CreatePostDto);
+    }
+    @Post('delUser')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '删除用户管理',description:"",})
+    setDelUser( @Req() req, @Body() CreatePostDto:dto.delReq) {
+      return this.delUser.setDelUser(req,CreatePostDto);
     }
     @Post('upUserPwd')
     @ApiBearerAuth()

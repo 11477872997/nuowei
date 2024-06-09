@@ -280,7 +280,9 @@ export const  judgeUserName = async(sql:string,sqlName="name", name: string) =>{
  */
 export const upAdminRole = async(id:string) =>{
   let sql = `SELECT role_key FROM roles WHERE id= '${id}'`;
+console.log(' sql',sql )
   let result = await AppDataSource.query(sql) as any;
+console.log('result ', result)
   if(result.length === 0) {
       return {
         code:-1,

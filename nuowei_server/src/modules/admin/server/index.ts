@@ -19,6 +19,7 @@ export * from './roles/delRoles';
 export * from './user/getUser';
 export * from './user/addUser';
 export * from './user/upUser';
+export * from './user/delUser';
 export * from './user/upUserPwd';
 
 // 多账号管理
