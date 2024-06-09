@@ -220,6 +220,9 @@ export class MoreController {
   constructor(
     private readonly getMoreAll: serverMode.GetMoreAll,
     private readonly getMore: serverMode.GetMore,
+    private readonly addMore: serverMode.AddMore,
+    private readonly upMore: serverMode.UpMore,
+    private readonly delMore: serverMode.DelMore,
   ){ }
   @Post('getMoreAll')
   @ApiBearerAuth()
@@ -236,6 +239,27 @@ export class MoreController {
   @ApiResponse({ status: 200, description: '字段描述', type: dto.GetMoreRes })
   GetMore( @Req() req, @Body() CreatePostDto:dto.GetMoreReq) {
     return this.getMore.getMoreList(req,CreatePostDto);
+  }
+  @Post('addMore')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '添加多账号管理',description:"",})
+  setAddMore( @Req() req, @Body() CreatePostDto:dto.AddMoreReq) {
+    return this.addMore.setAddMore(req,CreatePostDto);
+  }
+  @Post('upMore')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '修改多账号管理',description:"",})
+  setUpMore( @Req() req, @Body() CreatePostDto:dto.UpMoreReq) {
+    return this.upMore.setUpMore(req,CreatePostDto);
+  }
+  @Post('delMore')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '删除多账号管理',description:"",})
+  setDelMore( @Req() req, @Body() CreatePostDto:dto.DelReq) {
+    return this.delMore.setDelMore(req,CreatePostDto);
   }
 }
 

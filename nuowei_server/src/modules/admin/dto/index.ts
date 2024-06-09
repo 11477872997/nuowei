@@ -19,6 +19,8 @@ export * from "./user/upTheme";
 // 多账号管理
 export * from './more/getMoreAll';
 export * from './more/getMore';
+export * from './more/addMore';
+export * from './more/upMore';
 // 通用
 export * from "./del";
 
