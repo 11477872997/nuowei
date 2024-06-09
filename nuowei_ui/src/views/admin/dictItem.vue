@@ -162,7 +162,7 @@ export default {
   },
   created() {
     let {id}=this.$route.query;
-    if(id) this.queryParams.dictId=Number(id);
+    if(id) this.queryParams.dictId= id;
     this.getDictItem();
     this.getDictAll();
   },

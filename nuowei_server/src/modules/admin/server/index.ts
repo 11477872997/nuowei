@@ -22,10 +22,15 @@ export * from './user/upUser';
 export * from './user/delUser';
 export * from './user/upUserPwd';
 export * from './user/upTheme';
-
 // 多账号管理
 export * from './more/getMoreAll';
 export * from './more/getMore';
 export * from './more/addMore';
 export * from './more/upMore';
 export * from './more/delMore';
+// 字典管理
+export * from './dict/getDictAll';
+export * from './dict/getDict';
+export * from './dict/addDict';
+export * from './dict/upDict';
+export * from './dict/delDict';

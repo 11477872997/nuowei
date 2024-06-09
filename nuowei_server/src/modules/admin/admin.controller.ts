@@ -263,4 +263,52 @@ export class MoreController {
   }
 }
 
+@ApiTags("字典管理")
+@Controller('admin')
+export class DictController {
+  constructor(
+    private readonly getDictAll: serverMode.GetDictAll,
+    private readonly getDict: serverMode.GetDict,
+    private readonly addDict: serverMode.AddDict,
+    private readonly upDict: serverMode.UpDict,
+    private readonly delDict: serverMode.DelDict,
+  ){ }
+  @Post('getDictAll')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '获取所有字典列表',description:"",})
+  @ApiResponse({ status: 200, description: '字段描述', type: dto.GetDictAllRes })
+  getDictAllList() {
+    return this.getDictAll.getDictAllList();
+  }
+  @Post('getDict')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '获取字典分页列表',description:"",})
+  @ApiResponse({ status: 200, description: '字段描述', type: dto.GetDictRes })
+  getDictList( @Req() req, @Body() CreatePostDto:dto.GetDictReq) {
+    return this.getDict.getDictList(req,CreatePostDto);
+  }
+  @Post('addDict')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '添加字典管理',description:"",})
+  setAddDict( @Req() req, @Body() CreatePostDto:dto.AddDictReq) {
+    return this.addDict.setAddDict(req,CreatePostDto);
+  }
+  @Post('upDict')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '修改字典管理',description:"",})
+  setUpDict( @Req() req, @Body() CreatePostDto:dto.UpDictReq) {
+    return this.upDict.setUpDict(req,CreatePostDto);
+  }
+  @Post('delDict')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '删除字典管理',description:"",})
+  setDelDict( @Req() req, @Body() CreatePostDto:dto.DelReq) {
+    return this.delDict.setDelDict(req,CreatePostDto);
+  }
+}
 

@@ -21,6 +21,13 @@ export * from './more/getMoreAll';
 export * from './more/getMore';
 export * from './more/addMore';
 export * from './more/upMore';
+// 字典管理
+export * from './dict/getDictAll';
+export * from './dict/getDict';
+export * from './dict/addDict';
+export * from './dict/upDict';
+
+
 // 通用
 export * from "./del";
 
