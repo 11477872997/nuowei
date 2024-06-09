@@ -5,23 +5,6 @@ export class UpUserReq {
   @IsNotEmpty({ message: 'id必填' })
   @ApiProperty({ description: 'id',example: "",required: true  })
   readonly id: string;
-  @IsOptional()
-  @ApiPropertyOptional({ description: '选中文字',example: "", })
-  readonly menuActiveText: string;
-  @IsOptional()
-  @ApiPropertyOptional({ description: '默认背景',example: "", })
-  readonly menuBg: string;
-  @IsOptional()
-  @ApiPropertyOptional({ description: 'hover背景',example: "", })
-  readonly menuHoverBg: string;
-  @IsOptional()
-  @ApiPropertyOptional({ description: '当前选中展开文字',example: "", })
-  readonly menuSubActiveText: string;
-  @IsOptional()
-  @ApiPropertyOptional({ description: '展开背景',example: "", })
-  readonly menuSubBg: string;
-  @IsOptional()
-  @ApiPropertyOptional({ description: '默认文字',example: "", })
   readonly menuText: string;
   @IsNotEmpty({ message: 'moreId必填' })
   @ApiProperty({ description: '账号归属',example: "",required: true  })

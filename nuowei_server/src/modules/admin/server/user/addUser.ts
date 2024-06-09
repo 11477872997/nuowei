@@ -8,7 +8,7 @@ export class AddUser {
   async setAddUser(req, body): Promise<object> {
     try {
       let res = (await utils.checkPermi(req, [
-        systemSettings.menus.menuAdd,
+        systemSettings.user.userAdd,
       ])) as any;
       if(res.code == -1 ) return res;
       if(body.name){

@@ -1,5 +1,4 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import * as sqlMoudes from '@utils/sql';
 import { AppDataSource } from '@config/dp';
 import * as utils from '@utils/index';
 import { systemSettings } from '@utils/setting';
@@ -8,7 +7,7 @@ export class UpUser {
   async setUpUser(req, body): Promise<object> {
     try {
       let res = (await utils.checkPermi(req, [
-        systemSettings.user.userQuery,
+        systemSettings.user.userUp,
       ])) as any;
       if (res.code == -1) return res;
       //总管理不能操作
@@ -43,7 +42,7 @@ export class UpUser {
       return {
         code: 0,
         message: '修改成功',
-        data: '',
+        data: resData,
       };
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);

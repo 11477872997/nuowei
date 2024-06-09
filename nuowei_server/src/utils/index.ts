@@ -72,6 +72,13 @@ export const getUserInfo = async (req: Request): Promise<object> => {
       db.select('name,id,admin,status,url,admin,roles_id as rolesId');
       db.where('id = :uid', { uid });
       const userInfo = await db.execute();
+      if(userInfo.length === 0){
+        return  resolve({
+          data:null,
+          code: -1,
+          message: '用户不存在！',
+        })
+      }
       resolve({ ...userInfo[0] });
     } catch (error) {
       reject(error);
@@ -247,7 +254,11 @@ export const checkPermi = async (
           data: null,
         });
     } catch (error) {
-      reject(error);
+      return resolve({
+        code: -1,
+        message: '菜单权限判断错误！！',
+        data: null,
+      });
     }
   });
 };
@@ -288,7 +299,7 @@ export const upAdminRole = async(id:string) =>{
   return result;
 }
 /**
-  * 是否操作的是角色总管理员
+  * 是否操作的是用户总管理员
   *  @param id  查询条件id
  */
 export const upAdmin = async(id:string) =>{
@@ -308,6 +319,22 @@ export const upAdmin = async(id:string) =>{
         data:null
       }
     
+  }
+  return result;
+}
+/**
+  * 通过id获取用户信息
+  *  @param id  查询条件id
+ */
+export const getUserId = async(id:string) =>{
+  let sql = `SELECT admin FROM user WHERE id= '${id}'`;
+  let result = await AppDataSource.query(sql) as any;
+  if(result.length === 0) {
+      return {
+        code:-1,
+        msg:"用户信息错误！！",
+        data:null
+      }
   }
   return result;
 }
