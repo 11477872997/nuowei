@@ -31,6 +31,7 @@ export class AdminController {
       private readonly upUser: serverMode.UpUser,
       private readonly delUser: serverMode.DelUser,
       private readonly upUserPwd: serverMode.UpUserPwd,
+      private readonly upTheme: serverMode.UpTheme,
       // 多账号管理
       private readonly getMoreAll: serverMode.GetMoreAll,
       
@@ -106,7 +107,7 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '菜单管理删除',description:"",})
-    setdelMenu( @Req() req, @Body() CreatePostDto:dto.delReq) {
+    setdelMenu( @Req() req, @Body() CreatePostDto:dto.DelReq) {
       return this.delMenu.setDelMenu(req,CreatePostDto);
     }
 // 角色管理
@@ -144,7 +145,7 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '删除角色管理',description:"",})
-    setDelRoles( @Req() req, @Body() CreatePostDto:dto.delReq) {
+    setDelRoles( @Req() req, @Body() CreatePostDto:dto.DelReq) {
       return this.delRoles.setDelRoles(req,CreatePostDto);
     }
 // 用户管理    
@@ -174,7 +175,7 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '删除用户管理',description:"",})
-    setDelUser( @Req() req, @Body() CreatePostDto:dto.delReq) {
+    setDelUser( @Req() req, @Body() CreatePostDto:dto.DelReq) {
       return this.delUser.setDelUser(req,CreatePostDto);
     }
     @Post('upUserPwd')
@@ -183,6 +184,13 @@ export class AdminController {
     @ApiOperation({ summary: '修改用户密码',description:"",})
     setUpUserPwd( @Req() req, @Body() CreatePostDto:dto.UpUserPwdReq) {
       return this.upUserPwd.setUpUserPwd(req,CreatePostDto);
+    }
+    @Post('upTheme')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '修改用户主题',description:"",})
+    setUpTheme( @Req() req, @Body() CreatePostDto:dto.UpThemeReq) {
+      return this.upTheme.setUpTheme(req,CreatePostDto);
     }
 // 多账号管理
     @Post('getMoreAll')

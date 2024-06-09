@@ -21,6 +21,7 @@ export * from './user/addUser';
 export * from './user/upUser';
 export * from './user/delUser';
 export * from './user/upUserPwd';
+export * from './user/upTheme';
 
 // 多账号管理
 export * from './more/getMoreAll';
