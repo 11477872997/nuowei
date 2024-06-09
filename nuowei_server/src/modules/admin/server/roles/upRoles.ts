@@ -29,7 +29,7 @@ export class UpRoles {
       let resData = await AppDataSource.query(`UPDATE roles SET
         roles = '${body.roles}',
         name = '${body.name}',
-        role_key = '${body.roleKey}',
+        role_key = '${body.roleKey?body.roleKey:''}',
         checked_roles = ''
         WHERE id = '${body.id}'`);
       return {

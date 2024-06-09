@@ -27,7 +27,7 @@ export class AddRoles {
         .values([
           {
             name: body.name,
-            role_key: body.roleKey,
+            role_key: body.roleKey?body.roleKey:'',
             roles: body.roles,
             checked_roles: '',
           },

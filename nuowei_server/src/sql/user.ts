@@ -44,11 +44,11 @@ export class User extends BaseEntity {
   pwd: string;
   // 账号编号
   @Column({
-    type: 'int',
-    default: 0,
+    type: 'varchar',
+    length: 255,
     comment: '账号编号',
   })
-  more_id: number;
+  more_id: string;
   // 备注
   @Column({ type: 'varchar', length: 255, comment: '备注' })
   remark: string;

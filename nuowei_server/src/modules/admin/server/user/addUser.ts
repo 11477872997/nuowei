@@ -23,24 +23,38 @@ export class AddUser {
           };
         }
       }
-    //   let meta = {};
      let resData =  await AppDataSource
       .createQueryBuilder()
       .insert()
       .into(sqlMoudes.User)
       .values([{
         name:body.name,
-        status:body.status,
+        status:body.status?body.status:1,
         roles_id:body.rolesId,
         remark:body.remark?body.remark:'',
         pwd:body.pwd,
         more_id :body.moreId,
         url:body.url?body.url:'',
+        }]) 
+      .execute() as any;
+      let resTheme =  await AppDataSource
+      .createQueryBuilder()
+      .insert()
+      .into(sqlMoudes.Theme)
+      .values([{
+        user_id:resData.identifiers[0].id,
+        menu_bg:'#304156',
+        menu_sub_bg:'#304156',
+        menu_text:'#bfcad5',
+        menu_active_text:'#409eff',
+        menu_sub_active_text :'#fff',
+        menu_hover_bg:'#001528',
         }])
       .execute();
+     
       return {
         code: 0,
-        data:'',
+        data:resTheme,
         message: '添加成功！',
       };
     } catch (error) {

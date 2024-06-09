@@ -28,6 +28,7 @@ export class AdminController {
       // 用户管理
       private readonly getUser: serverMode.GetUser,
       private readonly addUser: serverMode.AddUser,
+      private readonly upUser: serverMode.UpUser,
       // 多账号管理
       private readonly getMoreAll: serverMode.GetMoreAll,
       
@@ -134,7 +135,7 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '修改角色管理',description:"",})
-    setupRoles( @Req() req, @Body() CreatePostDto:dto.upRolesReq) {
+    setupRoles( @Req() req, @Body() CreatePostDto:dto.UpRolesReq) {
       return this.upRoles.setupRoles(req,CreatePostDto);
     }
     @Post('delRoles')
@@ -157,9 +158,15 @@ export class AdminController {
     @ApiBearerAuth()
     @UseGuards( AuthGuard('jwt'))
     @ApiOperation({ summary: '添加用户管理',description:"",})
-    // @ApiResponse({ status: 200, description: '字段描述', type: dto.GetUserRes })
-    setAddUser( @Req() req, @Body() CreatePostDto:dto.AdduserReq) {
+    setAddUser( @Req() req, @Body() CreatePostDto:dto.AddUserReq) {
       return this.addUser.setAddUser(req,CreatePostDto);
+    }
+    @Post('upUser')
+    @ApiBearerAuth()
+    @UseGuards( AuthGuard('jwt'))
+    @ApiOperation({ summary: '修改用户管理',description:"",})
+    setUpUser( @Req() req, @Body() CreatePostDto:dto.UpUserReq) {
+      return this.upUser.setUpUser(req,CreatePostDto);
     }
 // 多账号管理
     @Post('getMoreAll')

@@ -23,5 +23,16 @@ export class GetUserRes extends User{
   updateTime: string
   @ApiPropertyOptional({ description: '创建时间'})
   createTime: string
-
+  @ApiPropertyOptional({ description: '默认背景'})
+  menuBg: string
+  @ApiPropertyOptional({ description: '展开背景'})
+  menuSubBg: string
+  @ApiPropertyOptional({ description: '默认文字'})
+  menuText: string
+  @ApiPropertyOptional({ description: '选中文字'})
+  menuActiveText: string
+  @ApiPropertyOptional({ description: '当前选中展开文字'})
+  menuSubActiveText: string
+  @ApiPropertyOptional({ description: 'hover背景'})
+  menuHoverBg: string
 }

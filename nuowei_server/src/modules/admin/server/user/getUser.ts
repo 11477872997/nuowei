@@ -31,7 +31,7 @@ export class GetUser {
       FROM 
         user AS a 
       LEFT 
-        JOIN theme b ON a.id=b.user_id 
+        JOIN theme b ON a.id = b.user_id 
       WHERE 1=1
   `;
       if (body.name) {
