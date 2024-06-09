@@ -5,3 +5,4 @@ export * from  '@sql/tests';
 export * from  '@sql/theme';
 export * from '@sql/user';
 export * from "@sql/router_menu";
+export * from "@sql/dict_item";

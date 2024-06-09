@@ -27,6 +27,9 @@ export * from './dict/getDict';
 export * from './dict/addDict';
 export * from './dict/upDict';
 
+// 字典管理
+export * from './dict_item/getDictItemAll';
+export * from './dict_item/getDictItem';
 
 // 通用
 export * from "./del";

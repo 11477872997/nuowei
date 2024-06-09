@@ -34,3 +34,9 @@ export * from './dict/getDict';
 export * from './dict/addDict';
 export * from './dict/upDict';
 export * from './dict/delDict';
+// 字典项目
+export * from './dict_item/getDictItemAll';
+export * from './dict_item/getDictItem';
+// export * from './dict/addDict';
+// export * from './dict/upDict';
+// export * from './dict/delDict';

@@ -64,7 +64,6 @@ export class InfoController {
 
 }
 
-
 @ApiTags("菜单管理")
 @Controller('admin')
 export class MenuController {
@@ -310,5 +309,53 @@ export class DictController {
   setDelDict( @Req() req, @Body() CreatePostDto:dto.DelReq) {
     return this.delDict.setDelDict(req,CreatePostDto);
   }
+}
+@ApiTags("字典项目")
+@Controller('admin')
+export class DictItemController {
+  constructor(
+    private readonly getDictAll: serverMode.GetDictItemAll,
+    private readonly getDictItem: serverMode.GetDictItem,
+    // private readonly addDict: serverMode.AddDict,
+    // private readonly upDict: serverMode.UpDict,
+    // private readonly delDict: serverMode.DelDict,
+  ){ }
+  @Post('getDictItemAll')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '获取所有字典项目列表',description:"",})
+  @ApiResponse({ status: 200, description: '字段描述', type: dto.GetDictItemRes })
+  getDictAllList(@Body() CreatePostDto:dto.GetDictItemAllReq) {
+    return this.getDictAll.getDictAllList(CreatePostDto);
+  }
+  @Post('getDictItem')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '获取字典项目分页列表',description:"",})
+  @ApiResponse({ status: 200, description: '字段描述', type: dto.GetDictItemRes })
+  getDictItemList( @Req() req, @Body() CreatePostDto:dto.GetDictItemReq) {
+    return this.getDictItem.getDictItemList(req,CreatePostDto);
+  }
+  // @Post('addDict')
+  // @ApiBearerAuth()
+  // @UseGuards( AuthGuard('jwt'))
+  // @ApiOperation({ summary: '添加字典管理',description:"",})
+  // setAddDict( @Req() req, @Body() CreatePostDto:dto.AddDictReq) {
+  //   return this.addDict.setAddDict(req,CreatePostDto);
+  // }
+  // @Post('upDict')
+  // @ApiBearerAuth()
+  // @UseGuards( AuthGuard('jwt'))
+  // @ApiOperation({ summary: '修改字典管理',description:"",})
+  // setUpDict( @Req() req, @Body() CreatePostDto:dto.UpDictReq) {
+  //   return this.upDict.setUpDict(req,CreatePostDto);
+  // }
+  // @Post('delDict')
+  // @ApiBearerAuth()
+  // @UseGuards( AuthGuard('jwt'))
+  // @ApiOperation({ summary: '删除字典管理',description:"",})
+  // setDelDict( @Req() req, @Body() CreatePostDto:dto.DelReq) {
+  //   return this.delDict.setDelDict(req,CreatePostDto);
+  // }
 }
 

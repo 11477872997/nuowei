@@ -51,7 +51,13 @@
         </template>
       </el-table-column>
     </el-table>
-
+    <pagination
+        v-show="total > 0"
+        :total="total"
+        :page.sync="queryParams.page"
+        :limit.sync="queryParams.size"
+        @pagination="getDictItem"
+    />
     <el-dialog title="操作框" :visible.sync="open" width="40%">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="字典类型">
@@ -107,7 +113,10 @@ export default {
   name: "DictItem",
   data(){
     return {
-      queryParams:{},
+      queryParams:{
+        page:1,
+        size:10
+      },
       total:0,
       loading:false,
       addLoading:false,
@@ -199,9 +208,10 @@ export default {
     },
     async getDictItem(){
       this.loading=true;
-      let {data}=await getDictItem(this.queryParams);
+      let {data,total}=await getDictItem(this.queryParams);
       this.loading=false;
       this.list=data;
+      this.total=total;
     },
     async getDictAll(){
       let {data}=await getDictAll();
@@ -210,6 +220,7 @@ export default {
       this.dictType=arr[0].type;
     },
     handleQuery(){
+      this.queryParams.page=1;
       this.getDictAll();
       this.getDictItem();
     },
