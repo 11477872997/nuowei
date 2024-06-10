@@ -30,6 +30,8 @@ export * from './dict/upDict';
 // 字典管理
 export * from './dict_item/getDictItemAll';
 export * from './dict_item/getDictItem';
+export * from './dict_item/addDictItem';
+export * from './dict_item/upDictItem';
 
 // 通用
 export * from "./del";

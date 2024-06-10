@@ -316,9 +316,9 @@ export class DictItemController {
   constructor(
     private readonly getDictAll: serverMode.GetDictItemAll,
     private readonly getDictItem: serverMode.GetDictItem,
-    // private readonly addDict: serverMode.AddDict,
-    // private readonly upDict: serverMode.UpDict,
-    // private readonly delDict: serverMode.DelDict,
+    private readonly addDictItem: serverMode.AddDictItem,
+    private readonly upDictItem: serverMode.UpDictItem,
+    private readonly delDictItem: serverMode.DelDictItem,
   ){ }
   @Post('getDictItemAll')
   @ApiBearerAuth()
@@ -336,26 +336,26 @@ export class DictItemController {
   getDictItemList( @Req() req, @Body() CreatePostDto:dto.GetDictItemReq) {
     return this.getDictItem.getDictItemList(req,CreatePostDto);
   }
-  // @Post('addDict')
-  // @ApiBearerAuth()
-  // @UseGuards( AuthGuard('jwt'))
-  // @ApiOperation({ summary: '添加字典管理',description:"",})
-  // setAddDict( @Req() req, @Body() CreatePostDto:dto.AddDictReq) {
-  //   return this.addDict.setAddDict(req,CreatePostDto);
-  // }
-  // @Post('upDict')
-  // @ApiBearerAuth()
-  // @UseGuards( AuthGuard('jwt'))
-  // @ApiOperation({ summary: '修改字典管理',description:"",})
-  // setUpDict( @Req() req, @Body() CreatePostDto:dto.UpDictReq) {
-  //   return this.upDict.setUpDict(req,CreatePostDto);
-  // }
-  // @Post('delDict')
-  // @ApiBearerAuth()
-  // @UseGuards( AuthGuard('jwt'))
-  // @ApiOperation({ summary: '删除字典管理',description:"",})
-  // setDelDict( @Req() req, @Body() CreatePostDto:dto.DelReq) {
-  //   return this.delDict.setDelDict(req,CreatePostDto);
-  // }
+  @Post('addDictItem')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '添加字典项目',description:"",})
+  setAddDictItem( @Req() req, @Body() CreatePostDto:dto.AddDictItemReq) {
+    return this.addDictItem.setAddDictItem(req,CreatePostDto);
+  }
+  @Post('upDictItem')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '修改字典项目',description:"",})
+  setUpDictItem( @Req() req, @Body() CreatePostDto:dto.UpDictItemReq) {
+    return this.upDictItem.setUpDictItem(req,CreatePostDto);
+  }
+  @Post('delDictItem')
+  @ApiBearerAuth()
+  @UseGuards( AuthGuard('jwt'))
+  @ApiOperation({ summary: '删除字典项目',description:"",})
+  setDelDictItem( @Req() req, @Body() CreatePostDto:dto.DelReq) {
+    return this.delDictItem.setDelDictItem(req,CreatePostDto);
+  }
 }
 
