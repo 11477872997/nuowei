@@ -5,7 +5,4 @@ export class GetDictItemAllReq {
   @IsNotEmpty({ message: 'dictId必填' })
   @ApiProperty({ description: '关联的字典归属id',example: "1",required: true  })
   readonly dictId: string;
-  @IsOptional()
-  @ApiPropertyOptional({ description: 'name查询字段',example: "", })
-  readonly name: string;
 }
