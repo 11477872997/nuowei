@@ -124,8 +124,8 @@ export class RolesController {
   @UseGuards( AuthGuard('jwt'))
   @ApiOperation({ summary: '获取角色管理全部列表',description:"",})
   @ApiResponse({ status: 200, description: '字段描述', type: dto.GetRolesRes })
-  GetRolesAll() {
-    return this.getRolesAll.getRolesAll();
+  GetRolesAll( @Body() CreatePostDto:dto.QueryReq) {
+    return this.getRolesAll.getRolesAll(CreatePostDto);
   }
   @Post('getRoles')
   @ApiBearerAuth()
@@ -228,8 +228,8 @@ export class MoreController {
   @UseGuards( AuthGuard('jwt'))
   @ApiOperation({ summary: '获取多账号所有列表',description:"",})
   @ApiResponse({ status: 200, description: '字段描述', type: dto.GetMoreAllRes })
-  GetMoreAll() {
-    return this.getMoreAll.getMoreAll();
+  GetMoreAll(@Body() CreatePostDto:dto.QueryReq) {
+    return this.getMoreAll.getMoreAll(CreatePostDto);
   }
   @Post('getMore')
   @ApiBearerAuth()
@@ -277,8 +277,8 @@ export class DictController {
   @UseGuards( AuthGuard('jwt'))
   @ApiOperation({ summary: '获取所有字典列表',description:"",})
   @ApiResponse({ status: 200, description: '字段描述', type: dto.GetDictAllRes })
-  getDictAllList() {
-    return this.getDictAll.getDictAllList();
+  getDictAllList( @Body() CreatePostDto:dto.QueryReq) {
+    return this.getDictAll.getDictAllList(CreatePostDto);
   }
   @Post('getDict')
   @ApiBearerAuth()

@@ -2,11 +2,14 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { AppDataSource } from '@config/dp';
 @Injectable()
 export class GetDictAll {
-  async getDictAllList(): Promise<object> {
+  async getDictAllList(body): Promise<object> {
     try {
       let query = `
       SELECT id,name,create_time AS createTime,remark,type FROM dict WHERE 1=1
   `;
+    if (body.name) {
+      (query += 'name LIKE :name'), { name: `%${body.name}%` };
+    }
       const results = await AppDataSource.query(query);
       return {
         code: 0,

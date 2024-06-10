@@ -35,6 +35,7 @@ export * from './dict_item/upDictItem';
 
 // 通用
 export * from "./del";
+export * from "./query";
 
 
 

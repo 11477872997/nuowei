@@ -24,6 +24,9 @@ export class GetDictItemAll {
             dict_sort ASC, 
             a.update_time DESC
     `;
+      if (body.name) {
+        (query += 'name LIKE :name'), { name: `%${body.name}%` };
+      }
         const results = await AppDataSource.query(query);
       return {
         code: 0,

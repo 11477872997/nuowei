@@ -2,12 +2,13 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { AppDataSource } from '@config/dp';
 @Injectable()
 export class GetMoreAll {
-  async getMoreAll(): Promise<object> {
+  async getMoreAll(body): Promise<object> {
     try {
-      let query = `
-     SELECT id,name,remark FROM more
-  `;
-      const results = await AppDataSource.query(query);
+      let sql = `SELECT id,name,remark FROM more`
+      if (body.name) {
+        (sql += 'name LIKE :name'), { name: `%${body.name}%` };
+      }
+      const results = await AppDataSource.query(sql);
       return {
         code: 0,
         message: '请求成功',
