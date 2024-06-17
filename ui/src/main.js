@@ -16,7 +16,6 @@ dayjs.extend(relativeTime)
 
 // 官方样式
 // import '@arco-design/web-vue/dist/arco.css'
-// MineAdmin-V2样式
 import '@arco-themes/vue-mine-admin-v2/index.less'
 import './style/skin.less'
 import './style/index.css'
@@ -50,5 +49,3 @@ app.config.globalProperties.$title = import.meta.env.VITE_APP_TITLE
 app.config.globalProperties.$url = import.meta.env.VITE_APP_BASE
 
 app.mount('#app')
-
-tool.capsule('MineAdmin', `v${packageJson.version} release`)
