@@ -142,7 +142,7 @@ function stringify (data) {
     delete config.headers
     // return
     const option = Object.assign(configDefault, config)
-
+    console.log('option',option.params);
     // json
     if (!isEmpty(option.params)) {
       option.url = option.url + '?' + stringify(option.params)

@@ -4,14 +4,6 @@ import verifyCode from '@cps/ma-verifyCode/index.vue'
 import { useUserStore } from '@/store'
 import { useTagStore } from '@/store'
 import { useRouter, useRoute } from 'vue-router'
-import { request } from '@/utils/request'
-
-request({
-  url: 'system/getBingBackgroundImage', timeout: 10000, method: 'get'
-}).then( res => {
-  document.getElementById('background').style.backgroundImage = `url(${res.data.url})`
-})
-
 const router = useRouter()
 const route  = useRoute()
 const Verify = ref(null)
@@ -21,7 +13,7 @@ const loading = ref(false)
 let isDevelop =  import.meta.env.VITE_APP_ENV === 'development'
 
 var odata = isDevelop ?
-    { username: 'superAdmin', password: 'admin123', code: '' }
+    { username: 'admin', password: 'admin123', code: '' }
     : { username: '', password: '', code: '' }
 
 
@@ -49,13 +41,13 @@ const handleSubmit = async ({ values, errors }) => {
 }
 </script>
 <template>
-  <div id="background" class="fixed"></div>
+  <div id="background" class="fixed" style="background-image: url('https://api.isoyu.com/bing_images.php');"></div>
   <div class="bg-backdrop-layout"></div>
   <div class="login-container">
     <div class="login-width md:w-10/12 w-11/12 mx-auto flex justify-between h-full items-center">
       <div class="w-6/12 mx-auto left-panel rounded-l pl-5 pr-5 hidden md:block">
         <div class="logo"><img :src="`${$url}logo.svg`" width="45"><span>{{ $title }}</span></div>
-        <div class="slogan flex justify-end"><span>---- {{ $t('sys.login.slogan') }}</span></div>
+        <div class="slogan flex justify-end"><span>{{ $t('sys.login.slogan') }}</span></div>
       </div>
 
       <div class="md:w-6/12 w-11/12 md:rounded-r mx-auto pl-5 pr-5 pb-10">
