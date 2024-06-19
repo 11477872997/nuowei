@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { disposition} from '@config/index';
 import { HttpExceptionFilter,TransformInterceptor } from "@utils/interface";
-import * as os from 'os'
 // swagger 文件插件
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
@@ -10,6 +9,8 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path'
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  app.enableCors();
    // 全局注册验证
    app.useGlobalPipes(new ValidationPipe({
     whitelist:true,
@@ -46,10 +47,13 @@ async function bootstrap() {
       "参数": '本地地址',
       "说明": `localhost:${disposition.host}`,
     },
+<<<<<<< HEAD
     // {
     //   "参数": 'ip地址',
     //   // "说明": `${os.networkInterfaces().WLAN[1].address}:${disposition.host}`,
     // },
+=======
+>>>>>>> master
     {
       "参数": '接口文档地址',
       "说明": `localhost:${disposition.host}/docs`,

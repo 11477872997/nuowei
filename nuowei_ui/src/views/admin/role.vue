@@ -24,7 +24,7 @@
     </el-form>
     <el-button icon="el-icon-plus" type="primary" plain size="small" @click="openDialog">添加角色</el-button>
     <el-table :data="rolesArr" v-loading="loading">
-      <el-table-column label="编号" prop="id" align="center" width="60" />
+      <el-table-column label="编号" prop="id" align="center" width="60" :show-overflow-tooltip="true" />
       <el-table-column label="角色名称" prop="name" align="center">
         <template slot-scope="scope"  >
           {{ scope.row.name }}

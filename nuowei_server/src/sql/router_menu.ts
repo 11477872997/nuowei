@@ -117,7 +117,7 @@ export class RouterMenu extends BaseEntity {
     type: 'varchar',
     length: 255,
     default: 'C',
-    comment: '菜单类型区分',
+    comment: '菜单类型区分:M目录,C:菜单,F:按钮',
   })
   menu_type: string;
   // 更新时间

@@ -14,7 +14,7 @@
             <el-button slot="prepend" icon="el-icon-question"></el-button>
           </el-input>
         </el-form-item>
-        <el-form-item prop="captcha">
+        <!-- <el-form-item prop="captcha">
           <div class="captcha-box">
             <el-input type="captcha" placeholder="请输入验证码" v-model="loginForm.captcha" @keyup.enter.native="handleLogin">
               <el-button slot="prepend">验证码</el-button>
@@ -22,7 +22,7 @@
             <div class="captcha-svg" @click="getCaptcha" v-html="captchaSvg"></div>
             <div class="captcha-hint" @click="getCaptcha">看不清？点击更换</div>
           </div>
-        </el-form-item>
+        </el-form-item> -->
         <div class="login-btn">
           <el-button type="primary" @click.native.prevent="handleLogin">登录</el-button>
         </div>
@@ -71,7 +71,7 @@ export default {
     },
   },
   created() {
-    this.getCaptcha();
+    // this.getCaptcha();
   },
   methods: {
     //点击登陆

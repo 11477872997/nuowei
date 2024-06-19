@@ -3,7 +3,7 @@
 // 2.引入axios库
 import requestAxios from "axios";
 import router from "@/router/index";
-import store from '@/store'//引入store(vuex)
+import store from "@/store"; //引入store(vuex)
 import { Message } from "element-ui";
 import { getToken, setToken, removeToken } from "@/utils/auth";
 
@@ -12,8 +12,10 @@ requestAxios.defaults.timeout = 5000; // 请求超时时间
 requestAxios.interceptors.request.use(
   // 请求拦截
   (config) => {
-    if (getToken()) config.headers.common["token"] = getToken();
-    if (sessionStorage.getItem("captcha")) config.headers.common["captcha"] = sessionStorage.getItem("captcha");
+    // if (getToken()) config.headers.common["token"] = getToken();
+    if (getToken())
+      config.headers.common["Authorization"] = "Bearer " + getToken();
+    // if (sessionStorage.getItem("captcha")) config.headers.common["captcha"] = sessionStorage.getItem("captcha");
     return config;
   },
 
@@ -26,43 +28,58 @@ requestAxios.interceptors.response.use(
   (response) => {
     // 相应拦截
     let { data } = response;
+    console.log("data", response);
     if (data.code == -1) {
-      Message.error(data.msg || "请求异常！");
-      return Promise.reject(data);
-    }
-    if (data.code == 203) {
-      Message.error(data.msg || "登陆失效！");
-      removeToken();
-      store.dispatch('user/logout');
+      Message.error(data.message || "请求异常！");
       return Promise.reject(data);
     }
     try {
       if (data.data.token) setToken(data.data.token);
-      response.headers.captcha&&sessionStorage.setItem("captcha",response.headers.captcha);
-    } catch (err) {
-
-    }
+      response.headers.captcha &&
+        sessionStorage.setItem("captcha", response.headers.captcha);
+    } catch (err) {}
     return response;
   },
   (err) => {
+    // console.log('err',err );
+    if( err.response){
+      let {data} = err.response;
+      if (data.status == 401) {
+        Message.error(data.message || "登陆失效！");
+        removeToken();
+        store.dispatch('user/logout');
+        return Promise.reject(data);
+      }else if(data.status == 500){
+        Message.error(data.message || "服务器异常！");
+        return Promise.reject(data);
+      }else{
+        Message.error(data.message || "请求异常！");
+        return Promise.reject(data);
+      }
+    }
     Message.error("请求异常！！");
     return Promise.reject(err);
   }
 );
 // requestAxios.defaults.baseURL=""
-const axios = function ({ path, method = "POST", data = {},responseType } = {}) {
+const axios = function ({
+  path,
+  method = "POST",
+  data = {},
+  responseType,
+} = {}) {
   return new Promise((resolve, reject) => {
     let datas = { params: { ...data } };
     if (method === "POST") datas = { ...{ data } };
     requestAxios({
-      url:process.env.VUE_APP_BASE_API+path,
+      url: process.env.VUE_APP_BASE_API + path,
       method,
       ...datas,
-        responseType
+      responseType,
     })
       .then((res) => {
-          if(responseType) return resolve(res);
-          resolve(res.data);
+        if (responseType) return resolve(res);
+        resolve(res.data);
       })
       .catch((err) => {
         reject(err);

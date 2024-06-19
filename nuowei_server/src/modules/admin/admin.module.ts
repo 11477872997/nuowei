@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AdminController } from './admin.controller';
-import { LoginService } from './server/login.service';
+import * as Modes from './admin.controller';
+import  * as serverMode from './server';
 import {  JwtModule } from '@nestjs/jwt';
 import { disposition} from '@config/index';
+import { JwtStrategy} from '@config/jwt';
 @Module({
   imports:[JwtModule.register({
     //生成token的key
@@ -10,10 +11,13 @@ import { disposition} from '@config/index';
     // signOption可以在JwtModule设定或是在createToken时候设定
     signOptions: {
       //token的有效时长
-        expiresIn: '1h',
+        expiresIn: '168h',
     },
 }),],
-  providers: [LoginService,JwtModule],
-  controllers: [AdminController]
+  providers: [JwtModule,
+    ...Object.values(serverMode), 
+    JwtStrategy],
+  controllers: [...Object.values(Modes)]
 })
+
 export class AdminModule {}

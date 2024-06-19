@@ -1,16 +1,8 @@
-import { Dict } from '@sql/dict';
-import { More } from '@sql/more';
-import { Roles } from '@sql/roles';
-import { Tests } from '@sql/tests';
-import { Theme } from '@sql/theme';
-import { User } from '@sql/user';
-import { RouterMenu } from "@sql/router_menu";
-export {
-    Dict,
-    More,
-    Roles,
-    Tests,
-    Theme,
-    User,
-    RouterMenu
-}
+export * from '@sql/dict';
+export * from '@sql/more';
+export * from  '@sql/roles';
+export * from  '@sql/tests';
+export * from  '@sql/theme';
+export * from '@sql/user';
+export * from "@sql/router_menu";
+export * from "@sql/dict_item";

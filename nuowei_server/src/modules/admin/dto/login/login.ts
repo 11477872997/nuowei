@@ -1,0 +1,61 @@
+import { ApiPropertyOptional,ApiProperty} from '@nestjs/swagger';
+import { IsNotEmpty} from 'class-validator';
+// ApiProperty 必填
+// ApiPropertyOptional 不是必填
+export class Theme {
+  @ApiPropertyOptional({ description: '默认背景'})
+  menuBg: string
+  @ApiPropertyOptional({ description: '展开背景'})
+  menuSubBg: string
+  @ApiPropertyOptional({ description: '默认文字'})
+  menuText: string
+  @ApiPropertyOptional({ description: '选中文字'})
+  menuActiveText: string
+  @ApiPropertyOptional({ description: '当前选中展开文字'})
+  menuSubActiveText: string
+  @ApiPropertyOptional({ description: 'hover背景'})
+  menuHoverBg: string
+
+}
+export class User {
+  @ApiPropertyOptional({ description: '名称'})
+  name: string
+  @ApiPropertyOptional({ description: 'id'})
+  id: string
+  @ApiPropertyOptional({ description: '1:管理员,0:普通'})
+  admin: string
+  @ApiPropertyOptional({ description: '1:启用,2:禁用'})
+  status: string
+  @ApiPropertyOptional({ description: '头像'})
+  url: string
+  @ApiPropertyOptional({ description: '用户角色'})
+  rolesId: string
+
+}
+// 响应
+export class LoginRes {
+    @ApiPropertyOptional({ description: '接口验证'})
+    token: string
+    @ApiPropertyOptional({ description: '角色key'})
+    roleKey: Array<any>
+    @ApiPropertyOptional({ description: '角色value'})
+    userRole: string
+    @ApiPropertyOptional({ description: 'true admin用户 false 普通用户'})
+    roleAdmin: boolean
+    @ApiPropertyOptional({ type: Theme })
+    theme: Theme
+    @ApiPropertyOptional({ type: User })
+    user: User
+ 
+  }
+//  请求
+export class LoginReq {
+    @IsNotEmpty({ message: '用户名必填' })
+    @ApiProperty({ description: '用户名',example: "admin" ,required: true })
+    readonly name: string;
+    @IsNotEmpty({ message: '密码必填' })
+    @ApiProperty({ description: '密码',example: "63f6deb737ab85677d6f11beea14a08b",required: true  })
+    readonly pwd: string;
+  
+  }
+  

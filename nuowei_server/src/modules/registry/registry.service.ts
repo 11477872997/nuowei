@@ -57,7 +57,7 @@ export class RegistryService {
         .into(sqlMoudes.Roles)
         .values([
           {
-            id: "4dwe",
+            id: "1",
             name: "admin",
             roles: "8,9,10,2,5,11,17,1",
             checked_roles: "8,9,10,5,11,17",
@@ -66,7 +66,7 @@ export class RegistryService {
             create_time: "2023-05-25 10:29:01",
           },
           {
-            id: "4dw123123e",
+            id: "12",
             name: "中级管家2",
             roles:
               "49,30,43,31,122,121,123,128,125,124,1,10,8,26,27,69,76,32,113,44,65,68",
@@ -76,7 +76,7 @@ export class RegistryService {
             create_time: "2023-05-25 10:29:01",
           },
           {
-            id: "4dw4444e",
+            id: "13",
             name: "初级管家1",
             roles:
               "30,43,31,122,121,123,125,124,1,10,8,26,27,69,76,32,113,44,65,66",
@@ -170,7 +170,7 @@ export class RegistryService {
             remark: "管理员",
             admin: 1,
             pwd: "63f6deb737ab85677d6f11beea14a08b",
-            more_id: 5,
+            more_id: '5',
             update_time: "2023-05-25 10:29:01",
             create_time: "2023-05-25 10:29:01",
           },
@@ -183,7 +183,7 @@ export class RegistryService {
             remark: "",
             admin: 0,
             pwd: "63f6deb737ab85677d6f11beea14a08b",
-            more_id: 8,
+            more_id: "8",
             update_time: "2023-05-25 10:29:01",
             create_time: "2023-05-25 10:29:01",
           },
@@ -196,7 +196,7 @@ export class RegistryService {
             remark: "",
             admin: 0,
             pwd: "63f6deb737ab85677d6f11beea14a08b",
-            more_id: 8,
+            more_id: "8",
             update_time: "2023-05-25 10:29:01",
             create_time: "2023-05-25 10:29:01",
           },

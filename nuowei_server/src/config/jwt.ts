@@ -15,10 +15,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload) {
       //payload与加密前的json对象一样
     //因为已经验证过token了所以在payload中进行验证用户信息是否为空
-    if(!payload.name || !payload.pwd) {
+    if(!payload.name || !payload.pwd || !payload.uid) {
       return false;
     }
-    let user={ name: payload.name, pwd: payload.pwd };
+    let user={ name: payload.name, pwd: payload.pwd ,uid:payload.uid};
     //返回后可在req中得到返回的值
     return user;
   }
