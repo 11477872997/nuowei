@@ -46,10 +46,10 @@ async function bootstrap() {
       "参数": '本地地址',
       "说明": `localhost:${disposition.host}`,
     },
-    {
-      "参数": 'ip地址',
-      "说明": `${os.networkInterfaces().WLAN[1].address}:${disposition.host}`,
-    },
+    // {
+    //   "参数": 'ip地址',
+    //   // "说明": `${os.networkInterfaces().WLAN[1].address}:${disposition.host}`,
+    // },
     {
       "参数": '接口文档地址',
       "说明": `localhost:${disposition.host}/docs`,
